@@ -78,7 +78,7 @@ AOS.init({
 			$('html, body').animate({
 				scrollTop: $($.attr(this, 'href')).offset().top - 70
 			}, 500, function () {
-				// window.location.hash = href;
+				window.location.hash = href;
 			});
 		});
 	};
@@ -177,7 +177,6 @@ AOS.init({
 	scrollWindow();
 
 	var counter = function () {
-
 		$('#section-counter, .hero-wrap, .ftco-counter, .ftco-about').waypoint(function (direction) {
 
 			if (direction === 'down' && !$(this.element).hasClass('ftco-animated')) {
@@ -263,7 +262,6 @@ AOS.init({
 		mainClass: 'mfp-fade',
 		removalDelay: 160,
 		preloader: false,
-
 		fixedContentPos: false
 	});
 })(jQuery);
