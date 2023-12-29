@@ -476,6 +476,10 @@ mark,
   list-style: none;
 }
 
+.list-unstyled > li > a:hover {
+  color: #ffbd39 !important;
+}
+
 .list-inline {
   padding-left: 0;
   list-style: none;
@@ -12699,6 +12703,7 @@ h5,
 }
 
 .services-1 {
+  border-radius: 8px;
   margin-bottom: 40px;
   padding: 2em;
   background: rgba(255, 255, 255, 0.1);
