@@ -20,9 +20,10 @@ export default function App() {
 
   const handleComplete = useCallback((s: UserSettings) => {
     // Theme is already applied live via data-theme attribute during selection.
-    // Lang stored in localStorage for future i18n use.
+    // Lang / sound stored for future use (i18n, optional UI sounds).
     localStorage.setItem('halcon-lang', s.lang)
     localStorage.setItem('halcon-theme', s.theme)
+    localStorage.setItem('halcon-sound', s.soundEnabled ? '1' : '0')
     setScreenDone(true)
   }, [])
 
