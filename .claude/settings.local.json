@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(npx --yes create-vite@latest temp-scaffold --template react-ts)",
+      "Bash(cp -r temp-scaffold/* .)",
+      "Bash(cp temp-scaffold/.gitignore .)",
+      "Bash(rm -rf temp-scaffold .DS_Store)",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(node -e \"const l = require\\(''lucide-react''\\); console.log\\(Object.keys\\(l\\).filter\\(k => k.toLowerCase\\(\\).includes\\(''github''\\) || k.toLowerCase\\(\\).includes\\(''linkedin''\\)\\).join\\('', ''\\)\\)\")"
+    ]
+  }
+}
