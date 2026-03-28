@@ -5,33 +5,33 @@ import { Code2, Cloud, Brain, Users, Shield, Zap } from 'lucide-react'
 const highlights = [
   {
     icon: Code2,
-    title: 'Fullstack Developer',
-    desc: 'Front-end & Back-end experience across multiple companies and industries',
+    title: 'Full-Stack Developer',
+    desc: 'From UI to backend APIs and cloud deployments — end to end experience',
   },
   {
     icon: Cloud,
     title: 'Cloud — AWS',
-    desc: 'EC2, Lambda, S3, RDS, IAM, API Gateway — actively certified',
+    desc: 'EC2, S3, IAM, RDS, Lambda, Serverless, CI/CD pipelines',
   },
   {
     icon: Brain,
     title: 'AI & System Design',
-    desc: 'Clean architecture, DDD patterns, AI-powered workflows',
+    desc: 'Clean architecture, scalable and cost-efficient solutions',
   },
   {
     icon: Users,
     title: 'Team Leadership',
-    desc: 'Committed, responsible, able to work under pressure without losing focus',
+    desc: 'Cross-functional collaboration, writing clean and maintainable code',
   },
   {
     icon: Shield,
     title: 'Quality First',
-    desc: 'SOLID, DRY, unit testing, scalable architecture principles',
+    desc: 'SOLID, DRY, unit testing with Jest, Cypress, Playwright',
   },
   {
     icon: Zap,
     title: 'Innovation',
-    desc: 'Passionate about creating impactful multimedia applications',
+    desc: 'Shipping features that improve performance, reliability, and UX',
   },
 ]
 
@@ -67,12 +67,15 @@ export default function About() {
           className="max-w-3xl mx-auto mb-16 space-y-6"
         >
           <motion.p variants={fadeInUp} className="text-text-muted text-base sm:text-lg leading-relaxed">
-            I'm a technology enthusiast who specializes in building robust applications with simple yet effective solutions.
-            I've worked as both a Front-end and Back-end Developer, giving me a comprehensive view of development.
+            Full-Stack Software Engineer with experience building and delivering web applications end to end,
+            from UI development to backend APIs and cloud deployments. I've worked with React/Next.js and
+            TypeScript on the front end, and Node.js/Express with PostgreSQL/SQL (as well as GraphQL and
+            WebSockets when needed) on the back end.
           </motion.p>
           <motion.p variants={fadeInUp} className="text-text-muted text-base sm:text-lg leading-relaxed">
-            My passion lies in creating impactful multimedia applications, always prioritizing innovation and quality.
-            I value continuous learning and teamwork collaboration.
+            I also focus on AWS cloud solutions, designing scalable, secure, and cost-efficient architectures.
+            I enjoy collaborating with cross-functional teams, writing clean and maintainable code, and shipping
+            features that improve performance, reliability, and the user experience.
           </motion.p>
         </motion.div>
 

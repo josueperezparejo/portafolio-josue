@@ -1,36 +1,43 @@
 import { motion } from 'framer-motion'
 import { fadeInUp, staggerContainer, scaleIn } from '../hooks/useScrollReveal'
-import { Award, Cloud, Code2, MonitorPlay, Server, Layers } from 'lucide-react'
+import { Award, Cloud, Code2, Server, Smartphone, MonitorPlay, Layers } from 'lucide-react'
 
 type Cert = {
   name: string
+  source: string
   icon: React.ComponentType<{ size?: number; className?: string }>
+  inProgress?: boolean
 }
 
 const certifications: Cert[] = [
-  { name: 'AWS Cloud Practitioner Essentials', icon: Cloud },
-  { name: 'AWS Cloud Quest: Cloud Practitioner', icon: Cloud },
-  { name: 'Claude Code in Action', icon: MonitorPlay },
-  { name: 'Curso de Backend con NestJS', icon: Server },
-  { name: 'Curso de Next.js Avanzado', icon: Layers },
+  { name: 'AWS Certified Cloud Practitioner', source: 'AWS Skill Builder', icon: Cloud, inProgress: true },
+  { name: 'Cloud Practitioner Essentials', source: 'AWS Skill Builder', icon: Cloud },
+  { name: 'Cloud Quest: Cloud Practitioner', source: 'AWS Skill Builder', icon: Cloud },
+  { name: 'Claude Code in Action', source: 'Anthropic', icon: MonitorPlay },
+  { name: 'Backend: Node.js, SQL/PostgreSQL, PHP & MySQL', source: 'Udemy', icon: Server },
+  { name: 'Frontend: JavaScript (ES7+), React (Hooks/MERN), Next.js, React Testing', source: 'Udemy', icon: Layers },
+  { name: 'Mobile: React Native (iOS/Android)', source: 'Udemy', icon: Smartphone },
 ]
 
 const skills = [
   'Amazon Web Services (AWS)',
-  'Artificial Intelligence',
-  'Team Leadership',
   'TypeScript',
   'NestJS',
   'Next.js',
-  'Docker',
   'React / React Native',
   'Node.js / Express',
   'GraphQL',
-  'PostgreSQL / NoSQL',
+  'WebSockets',
+  'PostgreSQL / SQL',
+  'DynamoDB / NoSQL',
+  'Docker',
+  'Serverless',
+  'CI/CD Pipelines',
   'Git / GitHub',
   'Tailwind CSS',
-  'Serverless / Cloud',
-  'Testing (Jest, Cypress, Playwright)',
+  'Jest / Cypress / Playwright',
+  'Artificial Intelligence',
+  'Team Leadership',
 ]
 
 export default function Certifications() {
@@ -69,7 +76,7 @@ export default function Certifications() {
               className="text-lg font-semibold text-text mb-6 flex items-center gap-2"
             >
               <Award size={20} className="text-accent" />
-              Certifications
+              Certifications & Training
             </motion.h3>
             <div className="space-y-3">
               {certifications.map((cert, i) => (
@@ -77,14 +84,24 @@ export default function Certifications() {
                   key={cert.name}
                   variants={fadeInUp}
                   custom={i}
-                  className="group flex items-center gap-4 p-4 rounded-xl border border-border bg-bg-card/30 hover:bg-bg-card-hover hover:border-border-hover transition-all duration-300"
+                  className="group flex items-start gap-4 p-4 rounded-xl border border-border bg-bg-card/30 hover:bg-bg-card-hover hover:border-border-hover transition-all duration-300"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent/20 transition-colors">
+                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent/20 transition-colors mt-0.5">
                     <cert.icon size={18} className="text-accent" />
                   </div>
-                  <span className="text-sm text-text-muted group-hover:text-text transition-colors">
-                    {cert.name}
-                  </span>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-sm text-text-muted group-hover:text-text transition-colors font-medium">
+                        {cert.name}
+                      </span>
+                      {cert.inProgress && (
+                        <span className="px-2 py-0.5 text-[10px] rounded-full bg-accent/15 text-accent-light border border-accent/20 font-medium uppercase tracking-wider">
+                          In Progress
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-text-muted/60 mt-0.5">{cert.source}</p>
+                  </div>
                 </motion.div>
               ))}
             </div>

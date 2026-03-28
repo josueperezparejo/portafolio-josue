@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowDown, MapPin, Cloud, Lightbulb } from 'lucide-react'
+import { ArrowDown, MapPin, Cloud, Lightbulb, Code2 } from 'lucide-react'
 
 const roles = [
+  'Full-Stack Developer',
   'Cloud Developer (AWS)',
   'Problem Solver',
-  'Fullstack Developer',
   'Passionate About Tech & Innovation',
-  'NestJS · TypeScript · Node.js',
+  'NestJS · TypeScript · Next.js',
 ]
 
 export default function Hero() {
@@ -98,12 +98,20 @@ export default function Hero() {
           </span>
         </motion.h1>
 
+        {/* Subtitle */}
+        <motion.p
+          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+          className="mt-4 text-lg sm:text-xl text-text-muted font-medium"
+        >
+          Full-Stack Developer | Cloud Developer (AWS)
+        </motion.p>
+
         {/* Typing animation */}
         <motion.div
           variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-          className="mt-6 h-8 flex items-center justify-center"
+          className="mt-4 h-8 flex items-center justify-center"
         >
-          <span className="text-lg sm:text-xl text-text-muted font-mono">
+          <span className="text-base sm:text-lg text-accent-light font-mono">
             {displayText}
             <motion.span
               animate={{ opacity: [1, 0] }}
@@ -125,7 +133,12 @@ export default function Hero() {
           <span className="w-1 h-1 rounded-full bg-border" />
           <span className="inline-flex items-center gap-1.5">
             <Cloud size={14} className="text-accent" />
-            AWS
+            AWS Cloud
+          </span>
+          <span className="w-1 h-1 rounded-full bg-border" />
+          <span className="inline-flex items-center gap-1.5">
+            <Code2 size={14} className="text-accent" />
+            Full-Stack
           </span>
           <span className="w-1 h-1 rounded-full bg-border" />
           <span className="inline-flex items-center gap-1.5">
@@ -139,8 +152,8 @@ export default function Hero() {
           variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
           className="mt-8 text-text-muted text-base sm:text-lg leading-relaxed max-w-xl mx-auto"
         >
-          I specialize in building robust applications with simple yet effective solutions.
-          From the initial idea to implementation — I enjoy the entire process, prioritizing innovation and quality.
+          Full-Stack Software Engineer with experience building and delivering web applications end to end,
+          from UI development to backend APIs and cloud deployments. I design scalable, secure, and cost-efficient architectures.
         </motion.p>
 
         {/* CTA Buttons */}

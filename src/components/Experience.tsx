@@ -1,79 +1,97 @@
 import { motion } from 'framer-motion'
 import { fadeInUp, staggerContainer } from '../hooks/useScrollReveal'
-import { Briefcase } from 'lucide-react'
+import { Briefcase, Shield } from 'lucide-react'
 
 type Job = {
   title: string
   company: string
   period: string
   location: string
-  description: string
+  bullets: string[]
   tags: string[]
+  isMilitary?: boolean
 }
 
 const jobs: Job[] = [
   {
-    title: 'Freelance Fullstack Developer',
-    company: 'Freelance',
-    period: 'May 2025 — Present',
+    title: 'Full-Stack Developer | Cloud Solutions Architect (AWS)',
+    company: 'Terrawind Global Protection',
+    period: '2025 — 2026',
     location: 'Colombia',
-    description:
-      'Working independently building web applications from front to back. Collaborating with clients to deliver scalable, responsive, and efficient solutions using modern technologies such as NestJS and Next.js.',
-    tags: ['NestJS', 'Next.js', 'TypeScript', 'PostgreSQL', 'AWS'],
+    bullets: [
+      'Continued delivering scalable AWS cloud solutions and backend services for ongoing projects.',
+      'Built and maintained APIs with Node.js, Express, and PostgreSQL, collaborating with cross-functional teams.',
+      'Worked with partner companies, including Arkho (AWS Partner), collaborating on cloud solutions and API development.',
+    ],
+    tags: ['AWS', 'Node.js', 'Express', 'PostgreSQL', 'Cloud Architecture'],
   },
   {
-    title: 'Frontend Developer',
+    title: 'Full-Stack Developer | Cloud Solutions Architect (AWS)',
+    company: 'Mainsoft',
+    period: '2025 — 2026',
+    location: 'Colombia',
+    bullets: [
+      'Worked as a consultant for Terrawind, delivering cloud-native AWS solutions for enterprise clients.',
+      'Designed scalable and secure architectures aligned with business and operational requirements.',
+      'Led end-to-end delivery (requirements, architecture, implementation), optimizing performance and cost.',
+    ],
+    tags: ['AWS', 'Cloud-Native', 'Architecture', 'Consulting', 'Enterprise'],
+  },
+  {
+    title: 'Front-End Developer',
     company: 'MUTA',
-    period: 'Sep 2024 — May 2025',
+    period: '2024 — 2025',
     location: 'Colombia',
-    description:
-      'Part of a team transforming businesses toward a circular economy in the recycling industry. Built modern, scalable, high-performance interfaces. Translated Figma designs into functional interfaces with focus on Screaming Architecture, SOLID, DRY, and unit testing with Jest.',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Redux Toolkit', 'Jest', 'Framer Motion'],
+    bullets: [
+      'Built scalable and responsive user interfaces using Next.js, React, TypeScript, and Tailwind CSS, integrating APIs with React Query and managing state with Redux Toolkit.',
+      'Translated Figma designs into clean, reusable components, improving maintainability by applying SOLID, DRY, and Clean Architecture principles, and adding unit tests with Jest.',
+    ],
+    tags: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Redux Toolkit', 'Jest'],
   },
   {
-    title: 'Backend Developer',
+    title: 'Back-End Developer',
     company: 'Horus Smart Energy',
-    period: 'Jan 2024 — Sep 2024',
+    period: '2024',
     location: 'Barranquilla, Colombia',
-    description:
-      'Built and maintained robust backend systems for an IoT and energy efficiency company. Developed efficient APIs and optimized databases. Collaborated with multidisciplinary teams to integrate services driving innovation and energy savings.',
-    tags: ['Node.js', 'Express', 'GraphQL', 'PostgreSQL', 'Docker', 'TypeScript'],
+    bullets: [
+      'Developed and maintained REST and GraphQL APIs for an IoT platform using Node.js, Express, and PostgreSQL, implementing new features and enhancing business logic with a focus on performance and scalability.',
+      'Worked with AWS services and backend best practices (clean code, testing, and monitoring) to ensure reliable production deployments and strong collaboration with front-end and product teams.',
+    ],
+    tags: ['Node.js', 'Express', 'GraphQL', 'PostgreSQL', 'Docker', 'AWS', 'IoT'],
   },
   {
-    title: 'Frontend Developer',
-    company: 'Vini',
-    period: 'Jul 2023 — Dec 2023',
+    title: 'Front-End Developer',
+    company: 'Vini App S.A.S.',
+    period: '2023',
     location: 'Barranquilla, Colombia',
-    description:
-      'Contributed to a wine-focused e-commerce platform connecting enthusiasts with their perfect choice. Ensured every UX/UI aspect was thoughtfully designed, balancing functionality and aesthetics.',
-    tags: ['React', 'UX/UI', 'E-commerce', 'Figma'],
+    bullets: [
+      'Implemented new features and pages based on Figma design specifications, ensuring responsive layouts and consistent UI behavior across devices.',
+      'Managed tasks independently, from requirements through QA, delivering improvements efficiently with a proactive and autonomous approach.',
+    ],
+    tags: ['React', 'Figma', 'E-commerce', 'UX/UI', 'Responsive'],
   },
   {
-    title: 'Multimedia Frontend Developer',
-    company: 'Teleperformance',
-    period: 'Jan 2023 — Jul 2023',
-    location: 'Bogota, Colombia',
-    description:
-      'Worked on ongoing projects providing support and maintenance to enhance functionality and design during internship. This experience inspired continued growth and pursuit of new opportunities.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'Multimedia'],
-  },
-  {
-    title: 'Frontend Developer',
-    company: 'Nexus-IT.co (Genomax)',
-    period: 'Feb 2023 — Jun 2023',
+    title: 'Front-End Developer',
+    company: 'Genomax Nexus Information Technologies S.A.S.',
+    period: '2022',
     location: 'Barranquilla, Colombia',
-    description:
-      'Transformed creative concepts into engaging user interfaces. Focused on optimizing performance, usability, and cross-platform adaptability for seamless user experiences.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'Performance'],
+    bullets: [
+      'Collaborated with a development team to build user interfaces using HTML, CSS, and JavaScript, transforming concepts into production-ready screens.',
+      'Improved performance, usability, and cross-browser compatibility, contributing to a smoother and more maintainable front-end experience.',
+    ],
+    tags: ['HTML', 'CSS', 'JavaScript', 'Performance', 'Cross-browser'],
   },
   {
     title: 'Aeronautical Firefighter — Military Service',
     company: 'Colombian Air Force (CACOM 3)',
     period: 'Apr 2017 — Apr 2018',
     location: 'Colombia',
-    description:
-      'Served as an aeronautical firefighter. Responsibilities included flight assistance, ground movement coordination, fuel supply operations, and emergency response. Also supported operations at Ernesto Cortissoz International Airport.',
+    bullets: [
+      'Served as an aeronautical firefighter. Responsibilities included flight assistance, ground coordination, fuel supply operations, and emergency response.',
+      'Also supported operations at Ernesto Cortissoz International Airport in Barranquilla.',
+    ],
     tags: ['Leadership', 'Pressure', 'Operations', 'Safety'],
+    isMilitary: true,
   },
 ]
 
@@ -110,58 +128,66 @@ export default function Experience() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.05 }}
             variants={staggerContainer}
-            className="space-y-8"
+            className="space-y-6"
           >
-            {jobs.map((job, i) => (
-              <motion.div
-                key={`${job.company}-${job.period}`}
-                variants={fadeInUp}
-                custom={i}
-                className="group relative flex gap-6"
-              >
-                {/* Timeline dot */}
-                <div className="hidden sm:flex flex-col items-center pt-1.5">
-                  <div className="relative z-10 w-10 h-10 rounded-full border-2 border-border bg-bg flex items-center justify-center group-hover:border-accent transition-colors duration-300">
-                    <Briefcase size={16} className="text-text-muted group-hover:text-accent transition-colors duration-300" />
-                  </div>
-                </div>
-
-                {/* Card */}
-                <div className="flex-1 group relative p-6 rounded-2xl border border-border bg-bg-card/30 backdrop-blur-sm hover:bg-bg-card-hover hover:border-border-hover transition-all duration-300">
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="relative">
-                    {/* Header */}
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-3">
-                      <div>
-                        <h3 className="font-semibold text-text text-lg">{job.title}</h3>
-                        <p className="text-accent text-sm font-medium">{job.company}</p>
-                      </div>
-                      <div className="text-xs text-text-muted sm:text-right shrink-0">
-                        <p>{job.period}</p>
-                        <p>{job.location}</p>
-                      </div>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-sm text-text-muted leading-relaxed mb-4">
-                      {job.description}
-                    </p>
-
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2">
-                      {job.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2.5 py-1 text-xs rounded-md bg-accent/10 text-accent-light border border-accent/10"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+            {jobs.map((job, i) => {
+              const Icon = job.isMilitary ? Shield : Briefcase
+              return (
+                <motion.div
+                  key={`${job.company}-${job.period}`}
+                  variants={fadeInUp}
+                  custom={i}
+                  className="group relative flex gap-6"
+                >
+                  {/* Timeline dot */}
+                  <div className="hidden sm:flex flex-col items-center pt-1.5">
+                    <div className="relative z-10 w-10 h-10 rounded-full border-2 border-border bg-bg flex items-center justify-center group-hover:border-accent transition-colors duration-300">
+                      <Icon size={16} className="text-text-muted group-hover:text-accent transition-colors duration-300" />
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+
+                  {/* Card */}
+                  <div className="flex-1 group relative p-6 rounded-2xl border border-border bg-bg-card/30 backdrop-blur-sm hover:bg-bg-card-hover hover:border-border-hover transition-all duration-300">
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="relative">
+                      {/* Header */}
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-3">
+                        <div>
+                          <h3 className="font-semibold text-text text-base sm:text-lg leading-snug">{job.title}</h3>
+                          <p className="text-accent text-sm font-medium">{job.company}</p>
+                        </div>
+                        <div className="text-xs text-text-muted sm:text-right shrink-0 mt-1 sm:mt-0">
+                          <p className="font-medium">{job.period}</p>
+                          <p>{job.location}</p>
+                        </div>
+                      </div>
+
+                      {/* Bullets */}
+                      <ul className="space-y-2 mb-4">
+                        {job.bullets.map((bullet, bi) => (
+                          <li key={bi} className="text-sm text-text-muted leading-relaxed flex gap-2">
+                            <span className="text-accent mt-1.5 shrink-0">•</span>
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2">
+                        {job.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2.5 py-1 text-xs rounded-md bg-accent/10 text-accent-light border border-accent/10"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )
+            })}
           </motion.div>
         </div>
       </div>

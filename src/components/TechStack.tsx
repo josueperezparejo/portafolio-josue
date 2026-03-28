@@ -9,34 +9,27 @@ type Category = {
 
 const categories: Category[] = [
   {
-    name: 'Languages',
+    name: 'Frontend',
     items: [
+      { name: 'React', detail: 'Hooks, context, React Query, custom hooks' },
+      { name: 'Next.js', detail: 'SSR, SSG, App Router, API routes' },
       { name: 'TypeScript', detail: 'Strict mode, decorators, generics' },
-      { name: 'JavaScript', detail: 'ES2022+' },
-      { name: 'Python', detail: 'Scripting, Lambda, automation' },
-      { name: 'C# / .NET', detail: 'ASP.NET Core APIs' },
+      { name: 'JavaScript', detail: 'ES6+ / ES2022+' },
+      { name: 'HTML5 / CSS3', detail: 'Semantic markup, animations, responsive' },
+      { name: 'Tailwind CSS', detail: 'Utility-first, component patterns' },
+      { name: 'Redux Toolkit', detail: 'State management, RTK Query' },
+      { name: 'Vite.js', detail: 'Fast dev server, optimized builds' },
     ],
   },
   {
     name: 'Backend',
     items: [
+      { name: 'Node.js / Express', detail: 'REST APIs, middleware, streaming' },
       { name: 'NestJS', detail: 'Modules, guards, pipes, DI' },
-      { name: 'Node.js / Express', detail: 'Middleware, streaming' },
-      { name: 'Bun', detail: 'Fast JS runtime' },
-      { name: 'Deno', detail: 'Secure runtime, built-in TS' },
-      { name: 'REST API', detail: 'Resource design, versioning' },
-      { name: 'GraphQL', detail: 'Apollo Server, subscriptions' },
-      { name: 'WebSockets', detail: 'Real-time via Socket.io' },
+      { name: 'REST APIs', detail: 'Resource design, versioning, best practices' },
+      { name: 'GraphQL', detail: 'Apollo Server, resolvers, subscriptions' },
+      { name: 'WebSockets', detail: 'Real-time features via Socket.io' },
       { name: 'Microservices', detail: 'Event-driven, message queues' },
-    ],
-  },
-  {
-    name: 'Frontend',
-    items: [
-      { name: 'React', detail: 'Hooks, context, custom hooks' },
-      { name: 'Next.js', detail: 'SSR, SSG, App Router' },
-      { name: 'Vite.js', detail: 'Fast dev server, optimized builds' },
-      { name: 'Tailwind CSS', detail: 'Utility-first CSS' },
     ],
   },
   {
@@ -44,50 +37,53 @@ const categories: Category[] = [
     items: [
       { name: 'React Native', detail: 'Cross-platform iOS & Android' },
       { name: 'Expo', detail: 'Managed workflow, OTA updates' },
+      { name: 'Android Studio', detail: 'Native Android development' },
     ],
   },
   {
     name: 'Databases',
     items: [
-      { name: 'PostgreSQL', detail: 'Relations, indexes, transactions' },
+      { name: 'PostgreSQL', detail: 'Relations, indexes, transactions, views' },
+      { name: 'SQL', detail: 'Complex queries, stored procedures' },
       { name: 'MySQL', detail: 'Stored procedures, replication' },
-      { name: 'MongoDB', detail: 'Aggregation pipelines' },
+      { name: 'MongoDB', detail: 'Aggregation pipelines, Mongoose' },
+      { name: 'DynamoDB', detail: 'Single-table design, on-demand scaling' },
       { name: 'Redis', detail: 'Caching, pub/sub, sessions' },
-      { name: 'DynamoDB', detail: 'Single-table design' },
       { name: 'Supabase', detail: 'Auth, storage, realtime' },
-      { name: 'Firebase', detail: 'Firestore, Auth, Functions' },
+      { name: 'Firebase', detail: 'Firestore, Auth, Cloud Functions' },
     ],
   },
   {
-    name: 'Cloud — AWS',
+    name: 'Cloud & DevOps',
     items: [
-      { name: 'Compute', detail: 'EC2 · Lambda · ECS · Fargate' },
-      { name: 'Storage', detail: 'S3 · RDS · EBS · Glacier' },
-      { name: 'Networking', detail: 'VPC · Route 53 · CloudFront' },
-      { name: 'Auth & Security', detail: 'IAM · Cognito · KMS · WAF' },
-      { name: 'Messaging', detail: 'SQS · SNS · EventBridge' },
-      { name: 'Monitoring', detail: 'CloudWatch · X-Ray · CloudTrail' },
-      { name: 'IaC & DevOps', detail: 'CDK · CloudFormation · CodePipeline' },
-    ],
-  },
-  {
-    name: 'DevOps',
-    items: [
+      { name: 'EC2', detail: 'Compute instances, auto-scaling' },
+      { name: 'S3', detail: 'Object storage, static assets, uploads' },
+      { name: 'IAM', detail: 'Identity management, policies, roles' },
+      { name: 'RDS', detail: 'Managed relational databases' },
+      { name: 'Lambda', detail: 'Serverless functions, event-driven' },
+      { name: 'Serverless', detail: 'Cost-efficient, auto-scaling architecture' },
       { name: 'Docker', detail: 'Multi-stage builds, Compose' },
-      { name: 'GitHub Actions', detail: 'CI/CD pipelines' },
-      { name: 'TypeORM', detail: 'Entities, migrations, relations' },
-      { name: 'Prisma', detail: 'Schema-first, type-safe queries' },
+      { name: 'CI/CD Pipelines', detail: 'GitHub Actions, automated deployments' },
+    ],
+  },
+  {
+    name: 'Testing',
+    items: [
+      { name: 'Jest', detail: 'Unit tests, mocking, coverage' },
+      { name: 'Cypress', detail: 'E2E testing, component testing' },
+      { name: 'Playwright', detail: 'Cross-browser E2E automation' },
+      { name: 'React Testing', detail: 'Testing Library, component tests' },
     ],
   },
   {
     name: 'Tools',
     items: [
-      { name: 'Git', detail: 'Branching strategies, conventional commits' },
-      { name: 'Clean Architecture', detail: 'SOLID, DDD, layered structure' },
-      { name: 'Agile / Scrum', detail: 'Sprints, ceremonies, retros' },
+      { name: 'Git / GitHub', detail: 'Branching strategies, conventional commits' },
+      { name: 'Clean Architecture', detail: 'SOLID, DRY, DDD, layered structure' },
       { name: 'Figma', detail: 'Design handoff, prototyping' },
-      { name: 'Jira', detail: 'Sprint planning, issue tracking' },
-      { name: 'Notion', detail: 'Documentation, wikis' },
+      { name: 'Agile / Scrum', detail: 'Sprints, ceremonies, retros' },
+      { name: 'TypeORM', detail: 'Entities, migrations, relations' },
+      { name: 'Prisma', detail: 'Schema-first, type-safe queries' },
     ],
   },
 ]
@@ -107,7 +103,7 @@ export default function TechStack() {
           className="text-center mb-16"
         >
           <motion.p variants={fadeInUp} className="text-accent text-sm font-medium tracking-widest uppercase mb-3">
-            Tech Stack
+            Technical Skills
           </motion.p>
           <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
             What I{' '}
@@ -116,7 +112,7 @@ export default function TechStack() {
             </span>
           </motion.h2>
           <motion.p variants={fadeInUp} className="mt-4 text-text-muted max-w-xl mx-auto">
-            A snapshot of the tools and technologies across my career — not exhaustive, but representative.
+            Technologies I use across frontend, backend, cloud, and DevOps — from development to production.
           </motion.p>
         </motion.div>
 

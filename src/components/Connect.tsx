@@ -30,7 +30,7 @@ const socials: SocialItem[] = [
   {
     icon: ({ className, size }) => <LinkedInIcon width={size} height={size} className={className} />,
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/josueperezparejo',
+    href: 'https://www.linkedin.com/in/JosueDavidPerezParejo',
     color: 'hover:border-blue-500/50 hover:shadow-blue-500/10',
   },
   {
