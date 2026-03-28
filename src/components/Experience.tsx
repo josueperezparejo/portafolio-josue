@@ -1,6 +1,9 @@
-import { motion } from 'framer-motion'
-import { fadeInUp, staggerContainer } from '../hooks/useScrollReveal'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { Briefcase, Shield } from 'lucide-react'
+import AnimatedSection from './AnimatedSection'
+import GlowCard from './GlowCard'
+import TextReveal from './TextReveal'
 
 type Job = {
   title: string
@@ -95,102 +98,136 @@ const jobs: Job[] = [
   },
 ]
 
+function TimelineDot({ isMilitary, index }: { isMilitary?: boolean; index: number }) {
+  const Icon = isMilitary ? Shield : Briefcase
+  return (
+    <div className="hidden sm:flex flex-col items-center pt-1.5">
+      <motion.div
+        initial={{ scale: 0, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: index * 0.1, duration: 0.4, type: 'spring', stiffness: 200 }}
+        className="relative z-10 w-10 h-10 rounded-full border-2 border-border bg-bg flex items-center justify-center group-hover:border-accent transition-colors duration-300"
+      >
+        <Icon size={16} className="text-text-muted group-hover:text-accent transition-colors duration-300" />
+        {/* Pulse ring */}
+        <motion.div
+          className="absolute inset-0 rounded-full border border-accent/30"
+          initial={{ scale: 1, opacity: 0 }}
+          whileInView={{ scale: [1, 1.5, 1.5], opacity: [0, 0.4, 0] }}
+          viewport={{ once: true }}
+          transition={{ delay: index * 0.1 + 0.3, duration: 1 }}
+        />
+      </motion.div>
+    </div>
+  )
+}
+
+function AnimatedTimelineLine() {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start center', 'end center'],
+  })
+  const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1])
+
+  return (
+    <div ref={ref} className="absolute left-[19px] top-2 bottom-2 hidden sm:block">
+      {/* Background line */}
+      <div className="w-px h-full bg-border/30" />
+      {/* Animated fill */}
+      <motion.div
+        className="absolute top-0 left-0 w-px origin-top"
+        style={{
+          scaleY,
+          height: '100%',
+          background: 'linear-gradient(to bottom, #0891b2, #6366f1, transparent)',
+        }}
+      />
+    </div>
+  )
+}
+
 export default function Experience() {
   return (
-    <section id="experience" className="relative py-32 px-6">
+    <AnimatedSection id="experience" className="py-32 px-6">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={staggerContainer}
-          className="text-center mb-16"
-        >
-          <motion.p variants={fadeInUp} className="text-accent text-sm font-medium tracking-widest uppercase mb-3">
+        <div className="text-center mb-16">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-accent text-sm font-medium tracking-widest uppercase mb-3"
+          >
             Experience
           </motion.p>
-          <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-            Where I've{' '}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+            <TextReveal text="Where I've" />
+            {' '}
             <span className="bg-gradient-to-r from-accent to-gradient-end bg-clip-text text-transparent">
-              worked
+              <TextReveal text="worked" delay={0.2} />
             </span>
-          </motion.h2>
-        </motion.div>
+          </h2>
+        </div>
 
         {/* Timeline */}
         <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-accent/50 via-border to-transparent hidden sm:block" />
+          <AnimatedTimelineLine />
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.05 }}
-            variants={staggerContainer}
-            className="space-y-6"
-          >
-            {jobs.map((job, i) => {
-              const Icon = job.isMilitary ? Shield : Briefcase
-              return (
-                <motion.div
-                  key={`${job.company}-${job.period}`}
-                  variants={fadeInUp}
-                  custom={i}
-                  className="group relative flex gap-6"
-                >
-                  {/* Timeline dot */}
-                  <div className="hidden sm:flex flex-col items-center pt-1.5">
-                    <div className="relative z-10 w-10 h-10 rounded-full border-2 border-border bg-bg flex items-center justify-center group-hover:border-accent transition-colors duration-300">
-                      <Icon size={16} className="text-text-muted group-hover:text-accent transition-colors duration-300" />
-                    </div>
-                  </div>
+          <div className="space-y-6">
+            {jobs.map((job, i) => (
+              <motion.div
+                key={`${job.company}-${job.period}`}
+                initial={{ opacity: 0, x: -30, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ delay: i * 0.08, duration: 0.6 }}
+                className="group relative flex gap-6"
+              >
+                <TimelineDot isMilitary={job.isMilitary} index={i} />
 
-                  {/* Card */}
-                  <div className="flex-1 group relative p-6 rounded-2xl border border-border bg-bg-card/30 backdrop-blur-sm hover:bg-bg-card-hover hover:border-border-hover transition-all duration-300">
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="relative">
-                      {/* Header */}
-                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-3">
-                        <div>
-                          <h3 className="font-semibold text-text text-base sm:text-lg leading-snug">{job.title}</h3>
-                          <p className="text-accent text-sm font-medium">{job.company}</p>
-                        </div>
-                        <div className="text-xs text-text-muted sm:text-right shrink-0 mt-1 sm:mt-0">
-                          <p className="font-medium">{job.period}</p>
-                          <p>{job.location}</p>
-                        </div>
+                <GlowCard className="flex-1">
+                  <div className="p-6">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-3">
+                      <div>
+                        <h3 className="font-semibold text-text text-base sm:text-lg leading-snug">{job.title}</h3>
+                        <p className="text-accent text-sm font-medium">{job.company}</p>
                       </div>
-
-                      {/* Bullets */}
-                      <ul className="space-y-2 mb-4">
-                        {job.bullets.map((bullet, bi) => (
-                          <li key={bi} className="text-sm text-text-muted leading-relaxed flex gap-2">
-                            <span className="text-accent mt-1.5 shrink-0">•</span>
-                            <span>{bullet}</span>
-                          </li>
-                        ))}
-                      </ul>
-
-                      {/* Tags */}
-                      <div className="flex flex-wrap gap-2">
-                        {job.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2.5 py-1 text-xs rounded-md bg-accent/10 text-accent-light border border-accent/10"
-                          >
-                            {tag}
-                          </span>
-                        ))}
+                      <div className="text-xs text-text-muted sm:text-right shrink-0 mt-1 sm:mt-0">
+                        <p className="font-medium">{job.period}</p>
+                        <p>{job.location}</p>
                       </div>
                     </div>
+
+                    <ul className="space-y-2 mb-4">
+                      {job.bullets.map((bullet, bi) => (
+                        <li key={bi} className="text-sm text-text-muted leading-relaxed flex gap-2">
+                          <span className="text-accent mt-1.5 shrink-0">•</span>
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="flex flex-wrap gap-2">
+                      {job.tags.map((tag) => (
+                        <motion.span
+                          key={tag}
+                          whileHover={{ scale: 1.1 }}
+                          className="px-2.5 py-1 text-xs rounded-md bg-accent/10 text-accent-light border border-accent/10 cursor-default"
+                        >
+                          {tag}
+                        </motion.span>
+                      ))}
+                    </div>
                   </div>
-                </motion.div>
-              )
-            })}
-          </motion.div>
+                </GlowCard>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   )
 }

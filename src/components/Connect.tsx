@@ -1,7 +1,11 @@
 import type { SVGProps } from 'react'
 import { motion } from 'framer-motion'
-import { fadeInUp, staggerContainer, scaleIn } from '../hooks/useScrollReveal'
+import { scaleIn } from '../hooks/useScrollReveal'
 import { Mail, Globe } from 'lucide-react'
+import AnimatedSection from './AnimatedSection'
+import GlowCard from './GlowCard'
+import TextReveal from './TextReveal'
+import MagneticButton from './MagneticButton'
 
 function GitHubIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -55,35 +59,46 @@ const socials: SocialItem[] = [
 
 export default function Connect() {
   return (
-    <section id="connect" className="relative py-32 px-6">
+    <AnimatedSection id="connect" className="py-32 px-6">
       <div className="max-w-4xl mx-auto text-center">
         {/* Header */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={staggerContainer}
-        >
-          <motion.p variants={fadeInUp} className="text-accent text-sm font-medium tracking-widest uppercase mb-3">
+        <div>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-accent text-sm font-medium tracking-widest uppercase mb-3"
+          >
             Connect
           </motion.p>
-          <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-            Let's{' '}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+            <TextReveal text="Let's" />
+            {' '}
             <span className="bg-gradient-to-r from-accent to-gradient-end bg-clip-text text-transparent">
-              work together
+              <TextReveal text="work together" delay={0.15} />
             </span>
-          </motion.h2>
-          <motion.p variants={fadeInUp} className="mt-4 text-text-muted max-w-lg mx-auto">
+          </h2>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-4 text-text-muted max-w-lg mx-auto"
+          >
             Always open to interesting projects and collaborations. Feel free to reach out through any of these channels.
           </motion.p>
-        </motion.div>
+        </div>
 
         {/* Social cards */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          variants={staggerContainer}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.08, delayChildren: 0.2 } },
+          }}
           className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4"
         >
           {socials.map((s, i) => (
@@ -94,39 +109,40 @@ export default function Connect() {
               rel="noopener noreferrer"
               variants={scaleIn}
               custom={i}
-              whileHover={{ scale: 1.05, y: -4 }}
+              whileHover={{ scale: 1.08, y: -6 }}
               whileTap={{ scale: 0.95 }}
-              className={`group flex flex-col items-center gap-3 p-6 rounded-2xl border border-border bg-bg-card/30 backdrop-blur-sm transition-all duration-300 hover:shadow-lg ${s.color}`}
             >
-              <div className="w-12 h-12 rounded-xl bg-bg-card flex items-center justify-center group-hover:bg-bg-card-hover transition-colors">
-                <s.icon size={22} className="text-text-muted group-hover:text-text transition-colors" />
-              </div>
-              <span className="text-sm font-medium text-text-muted group-hover:text-text transition-colors">
-                {s.label}
-              </span>
+              <GlowCard className={`transition-all duration-300 hover:shadow-lg ${s.color}`}>
+                <div className="flex flex-col items-center gap-3 p-6">
+                  <div className="w-12 h-12 rounded-xl bg-bg-card flex items-center justify-center">
+                    <s.icon size={22} className="text-text-muted group-hover:text-text transition-colors" />
+                  </div>
+                  <span className="text-sm font-medium text-text-muted">
+                    {s.label}
+                  </span>
+                </div>
+              </GlowCard>
             </motion.a>
           ))}
         </motion.div>
 
         {/* Email CTA */}
         <motion.div
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true }}
-          variants={fadeInUp}
+          transition={{ duration: 0.7, delay: 0.4 }}
           className="mt-16"
         >
-          <motion.a
+          <MagneticButton
             href="mailto:josueperezparejo@gmail.com"
             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-accent to-accent-dark text-white font-medium rounded-2xl hover:shadow-xl hover:shadow-accent/20 transition-shadow"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
           >
             <Mail size={18} />
             josueperezparejo@gmail.com
-          </motion.a>
+          </MagneticButton>
         </motion.div>
       </div>
-    </section>
+    </AnimatedSection>
   )
 }

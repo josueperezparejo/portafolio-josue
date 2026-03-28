@@ -1,4 +1,5 @@
 import GridBackground from './components/GridBackground'
+import ScrollProgress from './components/ScrollProgress'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -14,6 +15,7 @@ export default function App() {
   return (
     <>
       <GridBackground />
+      <ScrollProgress />
       <Navbar />
       <main>
         <Hero />
