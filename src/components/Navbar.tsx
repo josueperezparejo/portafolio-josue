@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Moon, Sun } from 'lucide-react'
 import FalconLogo from './FalconLogo'
+
+type Theme = 'dark' | 'light'
 
 const links = [
   { label: 'About', href: '#about' },
@@ -11,14 +13,33 @@ const links = [
   { label: 'Connect', href: '#connect' },
 ]
 
-export default function Navbar() {
+export default function Navbar({ portfolioReady }: { portfolioReady: boolean }) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [theme, setTheme] = useState<Theme>('dark')
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    if (!portfolioReady) return
+    const t = localStorage.getItem('halcon-theme')
+    if (t === 'light' || t === 'dark') {
+      setTheme(t)
+      document.documentElement.setAttribute('data-theme', t)
+    }
+  }, [portfolioReady])
+
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => {
+      const next: Theme = prev === 'dark' ? 'light' : 'dark'
+      document.documentElement.setAttribute('data-theme', next)
+      localStorage.setItem('halcon-theme', next)
+      return next
+    })
   }, [])
 
   return (
@@ -50,24 +71,49 @@ export default function Navbar() {
               <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-accent rounded-full transition-all duration-300 group-hover:w-4/5" />
             </motion.a>
           ))}
-          <motion.a
-            href="mailto:josueperezparejo@gmail.com"
-            className="ml-3 px-4 py-2 text-sm font-medium bg-accent/10 text-accent-light border border-accent/20 rounded-lg hover:bg-accent/20 transition-all"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Contact
-          </motion.a>
+          <div className="ml-3 flex items-center gap-2">
+            <motion.a
+              href="mailto:josueperezparejo@gmail.com"
+              className="px-4 py-2 text-sm font-medium bg-accent/10 text-accent-light border border-accent/20 rounded-lg hover:bg-accent/20 transition-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Contact
+            </motion.a>
+            {portfolioReady && (
+              <motion.button
+                type="button"
+                onClick={toggleTheme}
+                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                className="p-2 rounded-lg border border-border text-text-muted hover:text-accent-light hover:bg-bg-card hover:border-accent/25 transition-all"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {theme === 'dark' ? <Sun size={18} strokeWidth={1.75} /> : <Moon size={18} strokeWidth={1.75} />}
+              </motion.button>
+            )}
+          </div>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden text-text-muted hover:text-text p-2"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        <div className="md:hidden flex items-center gap-1">
+          {portfolioReady && (
+            <button
+              type="button"
+              onClick={toggleTheme}
+              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              className="p-2 rounded-lg text-text-muted hover:text-accent-light"
+            >
+              {theme === 'dark' ? <Sun size={20} strokeWidth={1.75} /> : <Moon size={20} strokeWidth={1.75} />}
+            </button>
+          )}
+          <button
+            className="text-text-muted hover:text-text p-2"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}

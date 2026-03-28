@@ -11,6 +11,7 @@ import Certifications from './components/Certifications'
 import Education from './components/Education'
 import Connect from './components/Connect'
 import Footer from './components/Footer'
+import FloatingSoundToggle from './components/FloatingSoundToggle'
 import LoadingScreen, { type UserSettings } from './components/LoadingScreen'
 
 const ThreeBackground = lazy(() => import('./components/ThreeBackground'))
@@ -33,7 +34,7 @@ export default function App() {
         <ThreeBackground />
       </Suspense>
       <ScrollProgress />
-      <Navbar />
+      <Navbar portfolioReady={screenDone} />
       <main>
         <Hero />
         <SectionDivider />
@@ -50,6 +51,7 @@ export default function App() {
         <Connect />
       </main>
       <Footer />
+      <FloatingSoundToggle visible={screenDone} />
 
       <AnimatePresence>
         {!screenDone && (
