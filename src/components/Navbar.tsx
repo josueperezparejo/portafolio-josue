@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import FalconLogo from './FalconLogo'
 
 const links = [
   { label: 'About', href: '#about' },
@@ -32,14 +33,8 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <motion.a
-          href="#"
-          className="text-lg font-semibold tracking-tight bg-gradient-to-r from-accent to-gradient-end bg-clip-text text-transparent"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          JP
-        </motion.a>
+        {/* Logo */}
+        <FalconLogo size={26} />
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-1">
