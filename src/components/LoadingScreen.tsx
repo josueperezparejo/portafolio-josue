@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FalconMark } from "./FalconLogo";
+import SessionIntelPanel from "./SessionIntelPanel";
 
 // ---------------------------------------------------------------------------
 // Types & translations
@@ -747,6 +748,15 @@ export default function LoadingScreen({
     };
   }, []);
 
+  const [layoutWide, setLayoutWide] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth >= 900 : true,
+  );
+  useEffect(() => {
+    const q = () => setLayoutWide(window.innerWidth >= 900);
+    window.addEventListener("resize", q);
+    return () => window.removeEventListener("resize", q);
+  }, []);
+
   const handleLaunch = useCallback(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     if (soundEnabledRef.current) playLaunchSound();
@@ -909,17 +919,33 @@ export default function LoadingScreen({
         <AnimatePresence mode="wait">
           {phase === "booting" && <BootScreen />}
           {phase === "select" && (
-            <SelectScreen
-              lang={lang}
-              setLang={setLang}
-              theme={theme}
-              setTheme={setTheme}
-              soundEnabled={soundEnabled}
-              setSoundEnabled={setSoundEnabled}
-              focused={focused}
-              setFocused={setFocused}
-              onLaunch={handleLaunch}
-            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: layoutWide ? "row" : "column",
+                alignItems: layoutWide ? "flex-start" : "center",
+                gap: layoutWide ? 36 : 24,
+                maxWidth: "min(96vw, 1000px)",
+                padding: "0 12px",
+              }}
+            >
+              <SelectScreen
+                lang={lang}
+                setLang={setLang}
+                theme={theme}
+                setTheme={setTheme}
+                soundEnabled={soundEnabled}
+                setSoundEnabled={setSoundEnabled}
+                focused={focused}
+                setFocused={setFocused}
+                onLaunch={handleLaunch}
+              />
+              <SessionIntelPanel
+                lang={lang}
+                theme={theme}
+                stacked={!layoutWide}
+              />
+            </div>
           )}
         </AnimatePresence>
       </div>
