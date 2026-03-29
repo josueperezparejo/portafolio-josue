@@ -5,6 +5,7 @@ import MagneticButton from './MagneticButton'
 import { FalconMark } from './FalconLogo'
 import { useLang } from '../context/LangContext'
 
+
 export default function Hero() {
   const { t, lang } = useLang()
   const [roleIndex, setRoleIndex]   = useState(0)
@@ -20,9 +21,12 @@ export default function Hero() {
 
   // Reset typewriter when language changes
   useEffect(() => {
-    setRoleIndex(0)
-    setDisplayText('')
-    setIsDeleting(false)
+    const id = setTimeout(() => {
+      setRoleIndex(0)
+      setDisplayText('')
+      setIsDeleting(false)
+    }, 0)
+    return () => clearTimeout(id)
   }, [lang])
 
   useEffect(() => {
@@ -32,8 +36,10 @@ export default function Hero() {
     if (!isDeleting && displayText === currentRole) {
       timeout = setTimeout(() => setIsDeleting(true), 2000)
     } else if (isDeleting && displayText === '') {
-      setIsDeleting(false)
-      setRoleIndex(prev => (prev + 1) % t.hero.roles.length)
+      timeout = setTimeout(() => {
+        setIsDeleting(false)
+        setRoleIndex(prev => (prev + 1) % t.hero.roles.length)
+      }, 0)
     } else {
       const speed = isDeleting ? 30 : 60
       timeout = setTimeout(() => {
@@ -57,6 +63,7 @@ export default function Hero() {
       ref={sectionRef}
       className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden"
     >
+      {/* Falcon watermark — very subtle */}
       <motion.div
         className="absolute pointer-events-none select-none"
         style={{
