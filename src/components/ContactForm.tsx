@@ -135,7 +135,7 @@ export default function ContactForm() {
       className="space-y-4"
     >
       <input type="hidden" name="form-name" value="contact" />
-      <input type="hidden" name="bot-field" {...formik.getFieldProps('bot-field')} />
+      <input type="hidden" {...formik.getFieldProps('bot-field')} />
       {/* Name + Email */}
       <div className="grid sm:grid-cols-2 gap-4">
         <div>

@@ -30,26 +30,6 @@ async function resumeLoaderAudio() {
   if (ctx?.state === "suspended") await ctx.resume();
 }
 
-function playThemeSwitchSound(mode: "dark" | "light") {
-  const ctx = getLoaderAudio();
-  if (!ctx) return;
-  const t = ctx.currentTime;
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
-  const filter = ctx.createBiquadFilter();
-  filter.type = "lowpass";
-  filter.frequency.value = mode === "dark" ? 900 : 3200;
-  osc.type = mode === "dark" ? "square" : "sine";
-  osc.frequency.setValueAtTime(mode === "dark" ? 165 : 495, t);
-  osc.connect(filter);
-  filter.connect(gain);
-  gain.connect(ctx.destination);
-  gain.gain.setValueAtTime(0.0001, t);
-  gain.gain.exponentialRampToValueAtTime(0.038, t + 0.018);
-  gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.1);
-  osc.start(t);
-  osc.stop(t + 0.11);
-}
 
 function playLaunchSound() {
   const ctx = getLoaderAudio();
