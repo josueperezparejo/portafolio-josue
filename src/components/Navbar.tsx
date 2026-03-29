@@ -71,7 +71,7 @@ export default function Navbar({ portfolioReady }: { portfolioReady: boolean }) 
 
           <div className="ml-3 flex items-center gap-2">
             <motion.a
-              href="mailto:josueperezparejo@gmail.com"
+              href="#connect"
               className="px-4 py-2 text-sm font-medium bg-accent/10 text-accent-light border border-accent/20 rounded-lg hover:bg-accent/20 transition-all"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -172,7 +172,7 @@ export default function Navbar({ portfolioReady }: { portfolioReady: boolean }) 
                 </a>
               ))}
               <a
-                href="mailto:josueperezparejo@gmail.com"
+                href="#connect"
                 className="px-4 py-3 text-sm font-medium text-accent-light bg-accent/10 rounded-lg text-center"
                 onClick={() => setMobileOpen(false)}
               >

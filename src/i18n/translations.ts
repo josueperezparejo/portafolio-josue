@@ -13,9 +13,8 @@ export const translations = {
         { label: 'Experience', href: '#experience' },
         { label: 'Stack',      href: '#stack' },
         { label: 'Certs',      href: '#certifications' },
-        { label: 'Connect',    href: '#connect' },
       ],
-      contact: 'Contact',
+      contact: 'Connect',
       toggleLang: 'ES',
     },
 
@@ -274,6 +273,29 @@ export const translations = {
       h1:          "Let's",
       h2:          'work together',
       description: 'Always open to interesting projects and collaborations. Feel free to reach out through any of these channels.',
+      whatsappMsg: "Hi! I'm reaching out after seeing your portfolio. I'd love to connect and discuss a potential collaboration.",
+      emailSubject: 'Contact from portfolio',
+      emailBody:    "Hi Josue,\n\nI found your portfolio and wanted to reach out.\n\n",
+      form: {
+        name:        { label: 'Name',    placeholder: 'John Doe' },
+        email:       { label: 'Email',   placeholder: 'john@example.com' },
+        subject:     { label: 'Subject', placeholder: 'Project proposal, collaboration...' },
+        message:     { label: 'Message', placeholder: 'Tell me about your project or idea...' },
+        submit:      'Send message',
+        submitting:  'Sending...',
+        success: {
+          title:   'Message sent!',
+          message: "Thanks for reaching out. I'll get back to you soon.",
+        },
+        errors: {
+          nameRequired:    'Name is required.',
+          emailRequired:   'Email is required.',
+          emailInvalid:    'Enter a valid email address.',
+          subjectRequired: 'Subject is required.',
+          messageRequired: 'Message is required.',
+          messageTooShort: 'Message must be at least 20 characters.',
+        },
+      },
     },
 
     footer: {
@@ -291,9 +313,8 @@ export const translations = {
         { label: 'Experiencia', href: '#experience' },
         { label: 'Stack',       href: '#stack' },
         { label: 'Certs',       href: '#certifications' },
-        { label: 'Contacto',    href: '#connect' },
       ],
-      contact: 'Contacto',
+      contact: 'Connect',
       toggleLang: 'EN',
     },
 
@@ -552,6 +573,29 @@ export const translations = {
       h1:          'Trabajemos',
       h2:          'juntos',
       description: 'Siempre abierto a proyectos interesantes y colaboraciones. No dudes en contactarme por cualquiera de estos canales.',
+      whatsappMsg: '¡Hola Josue! He visto tu portafolio y me gustaría conversar sobre una posible colaboración.',
+      emailSubject: 'Contacto desde tu portafolio',
+      emailBody:    'Hola Josue,\n\nEncontré tu portafolio y quería escribirte.\n\n',
+      form: {
+        name:        { label: 'Nombre',  placeholder: 'Juan García' },
+        email:       { label: 'Correo',  placeholder: 'juan@ejemplo.com' },
+        subject:     { label: 'Asunto',  placeholder: 'Propuesta de proyecto, colaboración...' },
+        message:     { label: 'Mensaje', placeholder: 'Cuéntame sobre tu proyecto o idea...' },
+        submit:      'Enviar mensaje',
+        submitting:  'Enviando...',
+        success: {
+          title:   '¡Mensaje enviado!',
+          message: 'Gracias por escribirme. Te responderé pronto.',
+        },
+        errors: {
+          nameRequired:    'El nombre es requerido.',
+          emailRequired:   'El correo es requerido.',
+          emailInvalid:    'Ingresa un correo válido.',
+          subjectRequired: 'El asunto es requerido.',
+          messageRequired: 'El mensaje es requerido.',
+          messageTooShort: 'El mensaje debe tener al menos 20 caracteres.',
+        },
+      },
     },
 
     footer: {
