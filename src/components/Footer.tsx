@@ -1,8 +1,10 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { FalconMark } from "./FalconLogo";
+import { useLang } from "../context/LangContext";
 
 export default function Footer() {
+  const { t } = useLang()
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -37,7 +39,7 @@ export default function Footer() {
             Colombia
           </p>
           <p className="text-text-muted/50 text-xs tracking-wide">
-            Built with Love ❤️
+            {t.footer.built}
           </p>
         </div>
       </div>

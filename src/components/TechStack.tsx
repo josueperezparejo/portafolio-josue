@@ -3,142 +3,48 @@ import { motion, AnimatePresence } from 'framer-motion'
 import AnimatedSection from './AnimatedSection'
 import GlowCard from './GlowCard'
 import TextReveal from './TextReveal'
-
-type Category = {
-  name: string
-  items: { name: string; detail: string }[]
-}
-
-const categories: Category[] = [
-  {
-    name: 'Frontend',
-    items: [
-      { name: 'React', detail: 'Hooks, context, React Query, custom hooks' },
-      { name: 'Next.js', detail: 'SSR, SSG, App Router, API routes' },
-      { name: 'TypeScript', detail: 'Strict mode, decorators, generics' },
-      { name: 'JavaScript', detail: 'ES6+ / ES2022+' },
-      { name: 'HTML5 / CSS3', detail: 'Semantic markup, animations, responsive' },
-      { name: 'Tailwind CSS', detail: 'Utility-first, component patterns' },
-      { name: 'Redux Toolkit', detail: 'State management, RTK Query' },
-      { name: 'Vite.js', detail: 'Fast dev server, optimized builds' },
-    ],
-  },
-  {
-    name: 'Backend',
-    items: [
-      { name: 'Node.js / Express', detail: 'REST APIs, middleware, streaming' },
-      { name: 'NestJS', detail: 'Modules, guards, pipes, DI' },
-      { name: 'REST APIs', detail: 'Resource design, versioning, best practices' },
-      { name: 'GraphQL', detail: 'Apollo Server, resolvers, subscriptions' },
-      { name: 'WebSockets', detail: 'Real-time features via Socket.io' },
-      { name: 'Microservices', detail: 'Event-driven, message queues' },
-    ],
-  },
-  {
-    name: 'Mobile',
-    items: [
-      { name: 'React Native', detail: 'Cross-platform iOS & Android' },
-      { name: 'Expo', detail: 'Managed workflow, OTA updates' },
-      { name: 'Android Studio', detail: 'Native Android development' },
-    ],
-  },
-  {
-    name: 'Databases',
-    items: [
-      { name: 'PostgreSQL', detail: 'Relations, indexes, transactions, views' },
-      { name: 'SQL', detail: 'Complex queries, stored procedures' },
-      { name: 'MySQL', detail: 'Stored procedures, replication' },
-      { name: 'MongoDB', detail: 'Aggregation pipelines, Mongoose' },
-      { name: 'DynamoDB', detail: 'Single-table design, on-demand scaling' },
-      { name: 'Redis', detail: 'Caching, pub/sub, sessions' },
-      { name: 'Supabase', detail: 'Auth, storage, realtime' },
-      { name: 'Firebase', detail: 'Firestore, Auth, Cloud Functions' },
-    ],
-  },
-  {
-    name: 'Cloud & DevOps',
-    items: [
-      { name: 'EC2', detail: 'Compute instances, auto-scaling' },
-      { name: 'S3', detail: 'Object storage, static assets, uploads' },
-      { name: 'IAM', detail: 'Identity management, policies, roles' },
-      { name: 'RDS', detail: 'Managed relational databases' },
-      { name: 'Lambda', detail: 'Serverless functions, event-driven' },
-      { name: 'Serverless', detail: 'Cost-efficient, auto-scaling architecture' },
-      { name: 'Docker', detail: 'Multi-stage builds, Compose' },
-      { name: 'CI/CD Pipelines', detail: 'GitHub Actions, automated deployments' },
-    ],
-  },
-  {
-    name: 'Testing',
-    items: [
-      { name: 'Jest', detail: 'Unit tests, mocking, coverage' },
-      { name: 'Cypress', detail: 'E2E testing, component testing' },
-      { name: 'Playwright', detail: 'Cross-browser E2E automation' },
-      { name: 'React Testing', detail: 'Testing Library, component tests' },
-    ],
-  },
-  {
-    name: 'Tools',
-    items: [
-      { name: 'Git / GitHub', detail: 'Branching strategies, conventional commits' },
-      { name: 'Clean Architecture', detail: 'SOLID, DRY, DDD, layered structure' },
-      { name: 'Figma', detail: 'Design handoff, prototyping' },
-      { name: 'Agile / Scrum', detail: 'Sprints, ceremonies, retros' },
-      { name: 'TypeORM', detail: 'Entities, migrations, relations' },
-      { name: 'Prisma', detail: 'Schema-first, type-safe queries' },
-    ],
-  },
-]
+import { useLang } from '../context/LangContext'
 
 export default function TechStack() {
+  const { t } = useLang()
   const [active, setActive] = useState(0)
 
   return (
     <AnimatedSection id="stack" className="py-32 px-6">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-16">
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.5 }}
             className="text-accent text-sm font-medium tracking-widest uppercase mb-3"
           >
-            Technical Skills
+            {t.techstack.label}
           </motion.p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-            <TextReveal text="What I" />
+            <TextReveal text={t.techstack.h1} />
             {' '}
-            <span className="bg-gradient-to-r from-accent to-gradient-end bg-clip-text text-transparent">
-              <TextReveal text="work with" delay={0.2} />
+            <span className="bg-linear-to-r from-accent to-gradient-end bg-clip-text text-transparent">
+              <TextReveal text={t.techstack.h2} delay={0.2} />
             </span>
           </h2>
           <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-4 text-text-muted max-w-xl mx-auto"
           >
-            Technologies I use across frontend, backend, cloud, and DevOps — from development to production.
+            {t.techstack.description}
           </motion.p>
         </div>
 
-        {/* Tab buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.6 }}
           className="flex flex-wrap justify-center gap-2 mb-10"
         >
-          {categories.map((cat, i) => (
+          {t.techstack.categories.map((cat, i) => (
             <motion.button
-              key={cat.name}
-              onClick={() => setActive(i)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              key={cat.name} onClick={() => setActive(i)}
+              whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
               className={`relative px-4 py-2 text-sm rounded-lg transition-all duration-300 ${
                 active === i
                   ? 'bg-accent text-white shadow-lg shadow-accent/25'
@@ -157,8 +63,7 @@ export default function TechStack() {
           ))}
         </motion.div>
 
-        {/* Tab content */}
-        <div className="min-h-[300px]">
+        <div className="min-h-75">
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
@@ -168,7 +73,7 @@ export default function TechStack() {
               transition={{ duration: 0.4 }}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3"
             >
-              {categories[active].items.map((item, i) => (
+              {t.techstack.categories[active].items.map((item, i) => (
                 <motion.div
                   key={item.name}
                   initial={{ opacity: 0, scale: 0.8, y: 20 }}

@@ -6,6 +6,7 @@ import AnimatedSection from './AnimatedSection'
 import GlowCard from './GlowCard'
 import TextReveal from './TextReveal'
 import MagneticButton from './MagneticButton'
+import { useLang } from '../context/LangContext'
 
 function GitHubIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -58,6 +59,8 @@ const socials: SocialItem[] = [
 ]
 
 export default function Connect() {
+  const { t } = useLang()
+
   return (
     <AnimatedSection id="connect" className="py-32 px-6">
       <div className="max-w-4xl mx-auto text-center">
@@ -70,13 +73,13 @@ export default function Connect() {
             transition={{ duration: 0.5 }}
             className="text-accent text-sm font-medium tracking-widest uppercase mb-3"
           >
-            Connect
+            {t.connect.label}
           </motion.p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-            <TextReveal text="Let's" />
+            <TextReveal text={t.connect.h1} />
             {' '}
-            <span className="bg-gradient-to-r from-accent to-gradient-end bg-clip-text text-transparent">
-              <TextReveal text="work together" delay={0.15} />
+            <span className="bg-linear-to-r from-accent to-gradient-end bg-clip-text text-transparent">
+              <TextReveal text={t.connect.h2} delay={0.15} />
             </span>
           </h2>
           <motion.p
@@ -86,7 +89,7 @@ export default function Connect() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-4 text-text-muted max-w-lg mx-auto"
           >
-            Always open to interesting projects and collaborations. Feel free to reach out through any of these channels.
+            {t.connect.description}
           </motion.p>
         </div>
 
@@ -136,7 +139,7 @@ export default function Connect() {
         >
           <MagneticButton
             href="mailto:josueperezparejo@gmail.com"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-accent to-accent-dark text-white font-medium rounded-2xl hover:shadow-xl hover:shadow-accent/20 transition-shadow"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-accent to-accent-dark text-white font-medium rounded-2xl hover:shadow-xl hover:shadow-accent/20 transition-shadow"
           >
             <Mail size={18} />
             josueperezparejo@gmail.com

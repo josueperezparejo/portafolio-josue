@@ -13,15 +13,18 @@ import Connect from './components/Connect'
 import Footer from './components/Footer'
 import FloatingSoundToggle from './components/FloatingSoundToggle'
 import LoadingScreen, { type UserSettings } from './components/LoadingScreen'
+import { LangProvider } from './context/LangContext'
+import type { Lang } from './i18n/translations'
 
 const ThreeBackground = lazy(() => import('./components/ThreeBackground'))
 
 export default function App() {
   const [screenDone, setScreenDone] = useState(false)
+  const [initialLang] = useState<Lang>(
+    () => (localStorage.getItem('halcon-lang') as Lang | null) ?? 'es'
+  )
 
   const handleComplete = useCallback((s: UserSettings) => {
-    // Theme is already applied live via data-theme attribute during selection.
-    // Lang / sound stored for future use (i18n, optional UI sounds).
     localStorage.setItem('halcon-lang', s.lang)
     localStorage.setItem('halcon-theme', s.theme)
     localStorage.setItem('halcon-sound', s.soundEnabled ? '1' : '0')
@@ -29,7 +32,7 @@ export default function App() {
   }, [])
 
   return (
-    <>
+    <LangProvider initialLang={initialLang}>
       <Suspense fallback={null}>
         <ThreeBackground />
       </Suspense>
@@ -58,6 +61,6 @@ export default function App() {
           <LoadingScreen key="loader" onComplete={handleComplete} />
         )}
       </AnimatePresence>
-    </>
+    </LangProvider>
   )
 }
