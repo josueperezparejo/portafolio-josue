@@ -43,16 +43,28 @@ export default function ContactForm() {
   })
 
   const formik = useFormik({
-    initialValues: { name: '', email: '', subject: '', message: '' },
+    initialValues: { name: '', email: '', subject: '', message: '', 'bot-field': '' },
     validationSchema: schema,
     validateOnBlur: true,
     validateOnChange: false,
-    onSubmit: async (_values, helpers) => {
+    onSubmit: async (values, helpers) => {
       setStatus('submitting')
-      // TODO: wire up to email service (Resend, EmailJS, Formspree, etc.)
-      await new Promise(r => setTimeout(r, 1200))
-      setStatus('success')
-      helpers.resetForm()
+      try {
+        const body = new URLSearchParams({
+          'form-name': 'contact',
+          ...values,
+        }).toString()
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body,
+        })
+        if (!res.ok) throw new Error('Network error')
+        setStatus('success')
+        helpers.resetForm()
+      } catch {
+        setStatus('error')
+      }
     },
   })
 
@@ -86,8 +98,44 @@ export default function ContactForm() {
     )
   }
 
+  if (status === 'error') {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="flex flex-col items-center justify-center gap-4 py-16 text-center"
+      >
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: 'spring', stiffness: 200, delay: 0.1 }}
+          className="w-16 h-16 rounded-full bg-red-400/10 flex items-center justify-center"
+        >
+          <AlertCircle size={32} className="text-red-400" />
+        </motion.div>
+        <h3 className="text-lg font-semibold text-text">{f.error.title}</h3>
+        <p className="text-sm text-text-muted max-w-xs">{f.error.message}</p>
+        <button
+          onClick={() => setStatus('idle')}
+          className="mt-2 text-xs text-accent hover:underline underline-offset-4"
+        >
+          ← {f.submit}
+        </button>
+      </motion.div>
+    )
+  }
+
   return (
-    <form onSubmit={formik.handleSubmit} noValidate className="space-y-4">
+    <form
+      onSubmit={formik.handleSubmit}
+      noValidate
+      name="contact"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      className="space-y-4"
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="hidden" name="bot-field" {...formik.getFieldProps('bot-field')} />
       {/* Name + Email */}
       <div className="grid sm:grid-cols-2 gap-4">
         <div>

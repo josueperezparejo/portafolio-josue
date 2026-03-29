@@ -795,26 +795,8 @@ export default function LoadingScreen({
         touchAction: "none",
       }}
     >
-      {themeFlashKey > 0 && (
-        <motion.div
-          key={themeFlashKey}
-          initial={{ opacity: theme === "light" ? 0.22 : 0.18 }}
-          animate={{ opacity: 0 }}
-          transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-          style={{
-            position: "absolute",
-            inset: 0,
-            pointerEvents: "none",
-            zIndex: 2,
-            background:
-              theme === "light"
-                ? "radial-gradient(circle at 50% 42%, rgba(203,213,225,0.55), transparent 64%)"
-                : "radial-gradient(circle at 50% 42%, rgba(34,211,238,0.4), transparent 58%)",
-          }}
-        />
-      )}
 
-      <div style={scanlineStyleFor(themeForFx)} />
+<div style={scanlineStyleFor(themeForFx)} />
       <motion.div
         animate={{
           background:
@@ -856,7 +838,7 @@ export default function LoadingScreen({
               />
               <SessionIntelPanel
                 lang={lang}
-                theme={theme}
+                theme={themeForFx}
                 stacked={!layoutWide}
               />
             </div>

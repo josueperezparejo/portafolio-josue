@@ -287,6 +287,10 @@ export const translations = {
           title:   'Message sent!',
           message: "Thanks for reaching out. I'll get back to you soon.",
         },
+        error: {
+          title:   'Something went wrong',
+          message: 'Please try again or reach me directly at josueperezparejo@gmail.com',
+        },
         errors: {
           nameRequired:    'Name is required.',
           emailRequired:   'Email is required.',
@@ -586,6 +590,10 @@ export const translations = {
         success: {
           title:   '¡Mensaje enviado!',
           message: 'Gracias por escribirme. Te responderé pronto.',
+        },
+        error: {
+          title:   'Algo salió mal',
+          message: 'Por favor intenta de nuevo o escríbeme a josueperezparejo@gmail.com',
         },
         errors: {
           nameRequired:    'El nombre es requerido.',
