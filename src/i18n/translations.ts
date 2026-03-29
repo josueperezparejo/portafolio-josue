@@ -66,7 +66,6 @@ export const translations = {
           title:    'Full-Stack Developer | Cloud Solutions Architect (AWS)',
           company:  'Terrawind Global Protection',
           period:   '2025 — 2026',
-          location: 'Colombia',
           bullets: [
             'Continued delivering scalable AWS cloud solutions and backend services for ongoing projects.',
             'Built and maintained APIs with Node.js, Express, and PostgreSQL, collaborating with cross-functional teams.',
@@ -78,7 +77,6 @@ export const translations = {
           title:    'Full-Stack Developer | Cloud Solutions Architect (AWS)',
           company:  'Mainsoft',
           period:   '2025 — 2026',
-          location: 'Colombia',
           bullets: [
             'Worked as a consultant for Terrawind, delivering cloud-native AWS solutions for enterprise clients.',
             'Designed scalable and secure architectures aligned with business and operational requirements.',
@@ -90,7 +88,6 @@ export const translations = {
           title:    'Front-End Developer',
           company:  'MUTA',
           period:   '2024 — 2025',
-          location: 'Colombia',
           bullets: [
             'Built scalable and responsive user interfaces using Next.js, React, TypeScript, and Tailwind CSS, integrating APIs with React Query and managing state with Redux Toolkit.',
             'Translated Figma designs into clean, reusable components, improving maintainability by applying SOLID, DRY, and Clean Architecture principles, and adding unit tests with Jest.',
@@ -101,7 +98,6 @@ export const translations = {
           title:    'Back-End Developer',
           company:  'Horus Smart Energy',
           period:   '2024',
-          location: 'Barranquilla, Colombia',
           bullets: [
             'Developed and maintained REST and GraphQL APIs for an IoT platform using Node.js, Express, and PostgreSQL, implementing new features and enhancing business logic with a focus on performance and scalability.',
             'Worked with AWS services and backend best practices (clean code, testing, and monitoring) to ensure reliable production deployments and strong collaboration with front-end and product teams.',
@@ -112,7 +108,6 @@ export const translations = {
           title:    'Front-End Developer',
           company:  'Vini App S.A.S.',
           period:   '2023',
-          location: 'Barranquilla, Colombia',
           bullets: [
             'Implemented new features and pages based on Figma design specifications, ensuring responsive layouts and consistent UI behavior across devices.',
             'Managed tasks independently, from requirements through QA, delivering improvements efficiently with a proactive and autonomous approach.',
@@ -123,7 +118,6 @@ export const translations = {
           title:    'Front-End Developer',
           company:  'Genomax Nexus Information Technologies S.A.S.',
           period:   '2022',
-          location: 'Barranquilla, Colombia',
           bullets: [
             'Collaborated with a development team to build user interfaces using HTML, CSS, and JavaScript, transforming concepts into production-ready screens.',
             'Improved performance, usability, and cross-browser compatibility, contributing to a smoother and more maintainable front-end experience.',
@@ -134,7 +128,6 @@ export const translations = {
           title:      'Aeronautical Firefighter — Military Service',
           company:    'Colombian Air Force (CACOM 3)',
           period:     'Apr 2017 — Apr 2018',
-          location:   'Colombia',
           bullets: [
             'Served as an aeronautical firefighter. Responsibilities included flight assistance, ground coordination, fuel supply operations, and emergency response.',
             'Also supported operations at Ernesto Cortissoz International Airport in Barranquilla.',
@@ -370,7 +363,6 @@ export const translations = {
           title:    'Desarrollador Full-Stack | Arquitecto de Soluciones Cloud (AWS)',
           company:  'Terrawind Global Protection',
           period:   '2025 — 2026',
-          location: 'Colombia',
           bullets: [
             'Continué entregando soluciones cloud escalables en AWS y servicios backend para proyectos en curso.',
             'Construí y mantuve APIs con Node.js, Express y PostgreSQL, colaborando con equipos multifuncionales.',
@@ -382,7 +374,6 @@ export const translations = {
           title:    'Desarrollador Full-Stack | Arquitecto de Soluciones Cloud (AWS)',
           company:  'Mainsoft',
           period:   '2025 — 2026',
-          location: 'Colombia',
           bullets: [
             'Trabajé como consultor para Terrawind, entregando soluciones cloud-native en AWS para clientes empresariales.',
             'Diseñé arquitecturas escalables y seguras alineadas con los requisitos del negocio y operacionales.',
@@ -394,7 +385,6 @@ export const translations = {
           title:    'Desarrollador Front-End',
           company:  'MUTA',
           period:   '2024 — 2025',
-          location: 'Colombia',
           bullets: [
             'Construí interfaces de usuario escalables y responsivas usando Next.js, React, TypeScript y Tailwind CSS, integrando APIs con React Query y gestionando el estado con Redux Toolkit.',
             'Traduje diseños de Figma en componentes limpios y reutilizables, mejorando el mantenimiento aplicando principios SOLID, DRY y Clean Architecture, y añadiendo pruebas unitarias con Jest.',
@@ -405,7 +395,6 @@ export const translations = {
           title:    'Desarrollador Back-End',
           company:  'Horus Smart Energy',
           period:   '2024',
-          location: 'Barranquilla, Colombia',
           bullets: [
             'Desarrollé y mantuve APIs REST y GraphQL para una plataforma IoT usando Node.js, Express y PostgreSQL, implementando nuevas funcionalidades y mejorando la lógica de negocio con enfoque en rendimiento y escalabilidad.',
             'Trabajé con servicios AWS y buenas prácticas de backend (código limpio, testing y monitoreo) para garantizar despliegues confiables en producción y una sólida colaboración con equipos de frontend y producto.',
@@ -416,7 +405,6 @@ export const translations = {
           title:    'Desarrollador Front-End',
           company:  'Vini App S.A.S.',
           period:   '2023',
-          location: 'Barranquilla, Colombia',
           bullets: [
             'Implementé nuevas funcionalidades y páginas basadas en especificaciones de diseño en Figma, asegurando layouts responsivos y comportamiento de UI consistente en todos los dispositivos.',
             'Gestioné tareas de forma independiente, desde los requisitos hasta el QA, entregando mejoras de manera eficiente con un enfoque proactivo y autónomo.',
@@ -427,7 +415,6 @@ export const translations = {
           title:    'Desarrollador Front-End',
           company:  'Genomax Nexus Information Technologies S.A.S.',
           period:   '2022',
-          location: 'Barranquilla, Colombia',
           bullets: [
             'Colaboré con un equipo de desarrollo para construir interfaces de usuario usando HTML, CSS y JavaScript, transformando conceptos en pantallas listas para producción.',
             'Mejoré el rendimiento, la usabilidad y la compatibilidad entre navegadores, contribuyendo a una experiencia frontend más fluida y mantenible.',
@@ -438,7 +425,6 @@ export const translations = {
           title:      'Bombero Aeronáutico — Servicio Militar',
           company:    'Fuerza Aérea Colombiana (CACOM 3)',
           period:     'Abr 2017 — Abr 2018',
-          location:   'Colombia',
           bullets: [
             'Desempeñé el rol de bombero aeronáutico. Responsabilidades: asistencia en vuelo, coordinación en tierra, operaciones de suministro de combustible y respuesta a emergencias.',
             'También apoyé operaciones en el Aeropuerto Internacional Ernesto Cortissoz en Barranquilla.',
