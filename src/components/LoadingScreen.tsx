@@ -180,7 +180,7 @@ const T = {
 // Boot sequence lines (short — 1.3 s total before selection appears)
 // ---------------------------------------------------------------------------
 /** Fondo del overlay en modo claro: gris-azulado suave (menos “pantalla blanca”). */
-const LOADER_BG_LIGHT = "#cfd8e3";
+const LOADER_BG_LIGHT = "#7f92a5";
 
 const BOOT_LINES = [
   "CLOUD SOLUTIONS ARCHITECT   [OK]",

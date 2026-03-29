@@ -1,6 +1,7 @@
 import { useRef, useMemo, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { useTheme } from "../hooks/useTheme";
 
 // Module-level mouse in NDC [-1, 1] — updated via window listener,
 // bypassing the pointer-events:none on the canvas container.
@@ -24,32 +25,39 @@ const _s = new Float32Array(STAR_COUNT * 3)
 for (let i = 0; i < _s.length; i++) _s[i] = Math.random()
 
 // ---------------------------------------------------------------------------
-function ParticleField() {
+function ParticleField({ isLight }: { isLight: boolean }) {
   const groupRef   = useRef<THREE.Group>(null)
   const pointsRef  = useRef<THREE.Points>(null)
 
-  const { positions, colors, home } = useMemo(() => {
+  const { positions, home } = useMemo(() => {
     const pos  = new Float32Array(PARTICLE_COUNT * 3)
-    const col  = new Float32Array(PARTICLE_COUNT * 3)
     const home = new Float32Array(PARTICLE_COUNT * 3)
-
-    const cyan   = new THREE.Color("#22d3ee")
-    const indigo = new THREE.Color("#818cf8")
-    const white  = new THREE.Color("#e0f2fe")
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const x = (_p[i*4]   - 0.5) * 30
       const y = (_p[i*4+1] - 0.5) * 18
       const z = (_p[i*4+2] - 0.5) * 40
       pos[i*3]=home[i*3]=x;  pos[i*3+1]=home[i*3+1]=y;  pos[i*3+2]=home[i*3+2]=z
+    }
 
+    return { positions: pos, home }
+  }, [])
+
+  // Colors rebuild when theme switches — dark navy in light mode, cyan/indigo in dark
+  const colors = useMemo(() => {
+    const col  = new Float32Array(PARTICLE_COUNT * 3)
+    const cyan   = new THREE.Color(isLight ? "#0a2540" : "#22d3ee")
+    const indigo = new THREE.Color(isLight ? "#1e1b4b" : "#818cf8")
+    const third  = new THREE.Color(isLight ? "#0f172a" : "#e0f2fe")
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
       const t = _p[i*4+3]
-      const c = t < 0.45 ? cyan : t < 0.75 ? indigo : white
+      const c = t < 0.45 ? cyan : t < 0.75 ? indigo : third
       col[i*3]=c.r;  col[i*3+1]=c.g;  col[i*3+2]=c.b
     }
 
-    return { positions: pos, colors: col, home }
-  }, [])
+    return col
+  }, [isLight])
 
   const starPositions = useMemo(() => {
     const pos = new Float32Array(STAR_COUNT * 3)
@@ -142,9 +150,9 @@ function ParticleField() {
         </bufferGeometry>
         <pointsMaterial
           size={0.07}
-          color="#e0f2fe"
+          color={isLight ? "#0f172a" : "#e0f2fe"}
           transparent
-          opacity={0.9}
+          opacity={isLight ? 0.75 : 0.9}
           sizeAttenuation
           depthWrite={false}
         />
@@ -180,6 +188,9 @@ function GeometricAccent() {
 // Root export — transparent canvas layered behind all content
 // ---------------------------------------------------------------------------
 export default function ThreeBackground() {
+  const theme   = useTheme()
+  const isLight = theme === 'light'
+
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
       _mx =  (e.clientX / window.innerWidth)  * 2 - 1
@@ -197,7 +208,7 @@ export default function ThreeBackground() {
         gl={{ alpha: true, antialias: false, powerPreference: "high-performance" }}
         style={{ background: "transparent" }}
       >
-        <ParticleField />
+        <ParticleField isLight={isLight} />
         <GeometricAccent />
       </Canvas>
     </div>

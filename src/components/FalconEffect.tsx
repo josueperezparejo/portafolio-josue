@@ -1,6 +1,7 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useRef, useMemo, useEffect } from 'react'
 import * as THREE from 'three'
+import { useTheme } from '../hooks/useTheme'
 
 const CAM_Z   = 2.4
 const CAM_FOV = 70
@@ -28,7 +29,7 @@ const WHITE       = new THREE.Color('#fff8e7')   // warm white — star sparks
 // ─────────────────────────────────────────────────────────────────────────────
 // Scene
 // ─────────────────────────────────────────────────────────────────────────────
-function Particles({ mouse }: { mouse: { current: THREE.Vector2 } }) {
+function Particles({ mouse, isLight }: { mouse: { current: THREE.Vector2 }; isLight: boolean }) {
   const ref = useRef<THREE.Points>(null)
 
   const { positions, colors, home, outerA, outerR } = useMemo(() => {
@@ -138,12 +139,12 @@ function Particles({ mouse }: { mouse: { current: THREE.Vector2 } }) {
       </bufferGeometry>
       <pointsMaterial
         vertexColors
-        size={0.026}
+        size={isLight ? 0.032 : 0.026}
         sizeAttenuation
         transparent
-        opacity={0.90}
+        opacity={isLight ? 0.95 : 0.90}
         depthWrite={false}
-        blending={THREE.AdditiveBlending}
+        blending={isLight ? THREE.NormalBlending : THREE.AdditiveBlending}
       />
     </points>
   )
@@ -156,6 +157,8 @@ function Particles({ mouse }: { mouse: { current: THREE.Vector2 } }) {
 export default function FalconEffect() {
   const containerRef = useRef<HTMLDivElement>(null)
   const mouse        = useRef(new THREE.Vector2(9999, 9999))
+  const theme        = useTheme()
+  const isLight      = theme === 'light'
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -185,7 +188,7 @@ export default function FalconEffect() {
         style={{ background: 'transparent', width: '100%', height: '100%' }}
         dpr={[1, 1.5]}
       >
-        <Particles mouse={mouse} />
+        <Particles mouse={mouse} isLight={isLight} />
       </Canvas>
     </div>
   )
