@@ -56,7 +56,7 @@ export default function Connect() {
         <LinkedInIcon width={size} height={size} className={className} />
       ),
       label: "LinkedIn",
-      href: "https://www.linkedin.com/in/JosueDavidPerezParejo",
+      href: "https://www.linkedin.com/in/josueperezparejo/",
       color: "hover:border-blue-500/50 hover:shadow-blue-500/10",
     },
     {
