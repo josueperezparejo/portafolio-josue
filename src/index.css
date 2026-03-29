@@ -17,28 +17,6 @@
   --font-sans: "Inter Variable", system-ui, -apple-system, sans-serif;
 }
 
-/* Light theme overrides — applied via data-theme="light" on <html> */
-/* Game-inspired tactical gray — steel panel, no white */
-[data-theme="light"] {
-  --color-bg: #8b9db0;
-  --color-bg-card: #99abbc;
-  --color-bg-card-hover: #91a4b5;
-  --color-border: #667e91;
-  --color-border-hover: #4c6070;
-  --color-text: #070e18;
-  --color-text-muted: #1e2f3e;
-  /* Darker accents for contrast on the medium-gray background */
-  --color-accent: #0c4a6e;
-  --color-accent-light: #0369a1;
-  --color-accent-dark: #083344;
-  --color-gradient-start: #0c4a6e;
-  --color-gradient-end: #3730a3;
-}
-
-[data-theme="light"] body {
-  background-color: #8b9db0;
-  color: #070e18;
-}
 
 * {
   scrollbar-width: thin;

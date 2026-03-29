@@ -8,7 +8,6 @@ import SessionIntelPanel from "./SessionIntelPanel";
 // ---------------------------------------------------------------------------
 export type UserSettings = {
   lang: "es" | "en";
-  theme: "dark" | "light";
   soundEnabled: boolean;
 };
 
@@ -180,7 +179,7 @@ const T = {
 // Boot sequence lines (short — 1.3 s total before selection appears)
 // ---------------------------------------------------------------------------
 /** Fondo del overlay en modo claro: gris-azulado suave (menos “pantalla blanca”). */
-const LOADER_BG_LIGHT = "#7f92a5";
+const LOADER_BG_LIGHT = "#878e97";
 
 const BOOT_LINES = [
   "CLOUD SOLUTIONS ARCHITECT   [OK]",
@@ -468,8 +467,6 @@ type FocusGroup = "lang" | "theme" | "sound" | "launch";
 function SelectScreen({
   lang,
   setLang,
-  theme,
-  setTheme,
   soundEnabled,
   setSoundEnabled,
   focused,
@@ -478,8 +475,6 @@ function SelectScreen({
 }: {
   lang: "es" | "en";
   setLang: (v: "es" | "en") => void;
-  theme: "dark" | "light";
-  setTheme: (v: "dark" | "light") => void;
   soundEnabled: boolean;
   setSoundEnabled: (v: boolean) => void;
   focused: FocusGroup;
@@ -487,40 +482,17 @@ function SelectScreen({
   onLaunch: () => void;
 }) {
   const t = T[lang];
-  const surface = theme;
-  const cyan = surface === "dark" ? "#22d3ee" : "#0e7490";
-  const logoShadow =
-    surface === "dark"
-      ? "0 0 12px rgba(34,211,238,0.4)"
-      : "0 0 10px rgba(14,116,144,0.35)";
-  const dividerGrad =
-    surface === "dark"
-      ? "linear-gradient(90deg,transparent,rgba(34,211,238,0.2),transparent)"
-      : "linear-gradient(90deg,transparent,rgba(14,116,144,0.28),transparent)";
-  const launchBgIdle =
-    surface === "dark" ? "rgba(34,211,238,0.05)" : "rgba(14,116,144,0.08)";
-  const launchBgFocus =
-    surface === "dark"
-      ? "linear-gradient(90deg, rgba(8,145,178,0.18), rgba(99,102,241,0.18))"
-      : "linear-gradient(90deg, rgba(14,116,144,0.22), rgba(99,102,241,0.15))";
-  const launchColorDim =
-    surface === "dark" ? "rgba(34,211,238,0.5)" : "rgba(14,116,144,0.55)";
-  const launchOutline =
-    focused === "launch"
-      ? surface === "dark"
-        ? "rgba(34,211,238,0.35)"
-        : "rgba(14,116,144,0.45)"
-      : surface === "dark"
-        ? "rgba(34,211,238,0.1)"
-        : "rgba(14,116,144,0.2)";
-  const launchShadow =
-    focused === "launch"
-      ? surface === "dark"
-        ? "0 0 20px rgba(34,211,238,0.15), inset 0 0 20px rgba(34,211,238,0.04)"
-        : "0 0 18px rgba(14,116,144,0.12), inset 0 0 16px rgba(14,116,144,0.06)"
-      : "none";
-  const hintColor =
-    surface === "dark" ? "rgba(34,211,238,0.25)" : "rgba(14,116,144,0.4)";
+  const cyan = "#22d3ee";
+  const logoShadow = "0 0 12px rgba(34,211,238,0.4)";
+  const dividerGrad = "linear-gradient(90deg,transparent,rgba(34,211,238,0.2),transparent)";
+  const launchBgIdle = "rgba(34,211,238,0.05)";
+  const launchBgFocus = "linear-gradient(90deg, rgba(8,145,178,0.18), rgba(99,102,241,0.18))";
+  const launchColorDim = "rgba(34,211,238,0.5)";
+  const launchOutline = focused === "launch" ? "rgba(34,211,238,0.35)" : "rgba(34,211,238,0.1)";
+  const launchShadow = focused === "launch"
+    ? "0 0 20px rgba(34,211,238,0.15), inset 0 0 20px rgba(34,211,238,0.04)"
+    : "none";
+  const hintColor = "rgba(34,211,238,0.25)";
 
   return (
     <motion.div
@@ -571,22 +543,7 @@ function SelectScreen({
           value={lang}
           focused={focused === "lang"}
           onChange={setLang}
-          surface={surface}
-        />
-      </div>
-
-      {/* Theme row */}
-      <div onClick={() => setFocused("theme")} style={{ marginTop: 4 }}>
-        <OptionRow
-          label={t.themeLabel}
-          options={[
-            { key: "dark" as const, label: t.dark },
-            { key: "light" as const, label: t.light },
-          ]}
-          value={theme}
-          focused={focused === "theme"}
-          onChange={setTheme}
-          surface={surface}
+          surface="dark"
         />
       </div>
 
@@ -601,7 +558,7 @@ function SelectScreen({
           value={soundEnabled ? "on" : "off"}
           focused={focused === "sound"}
           onChange={(k) => setSoundEnabled(k === "on")}
-          surface={surface}
+          surface="dark"
         />
       </div>
 
@@ -669,13 +626,11 @@ export default function LoadingScreen({
 }) {
   const [phase, setPhase] = useState<Phase>("booting");
   const [lang, setLangState] = useState<"es" | "en">("en");
-  const [theme, setThemeState] = useState<"dark" | "light">("dark");
   const [soundEnabled, setSoundEnabledState] = useState(true);
   const [focused, setFocused] = useState<FocusGroup>("lang");
-  const [themeFlashKey, setThemeFlashKey] = useState(0);
   const soundEnabledRef = useRef(true);
   const phaseRef = useRef(phase);
-  const themeForFx = phase === "booting" ? "dark" : theme;
+  const themeForFx = "dark";
 
   useEffect(() => {
     phaseRef.current = phase;
@@ -696,21 +651,6 @@ export default function LoadingScreen({
       return v;
     });
   }, []);
-
-  const setTheme = useCallback((v: "dark" | "light") => {
-    setThemeState((prev) => {
-      if (prev === v) return prev;
-      if (soundEnabledRef.current) playThemeSwitchSound(v);
-      if (phaseRef.current === "select") {
-        queueMicrotask(() => setThemeFlashKey((k) => k + 1));
-      }
-      return v;
-    });
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
 
   const setLang = useCallback((v: "es" | "en") => {
     setLangState((prev) => {
@@ -762,10 +702,10 @@ export default function LoadingScreen({
     if (soundEnabledRef.current) playLaunchSound();
     setPhase("exit");
     setTimeout(
-      () => onComplete({ lang, theme, soundEnabled }),
+      () => onComplete({ lang, soundEnabled }),
       650,
     );
-  }, [lang, theme, soundEnabled, onComplete]);
+  }, [lang, soundEnabled, onComplete]);
 
   // Keyboard navigation (only active during select phase)
   useEffect(() => {
@@ -777,36 +717,22 @@ export default function LoadingScreen({
           e.preventDefault();
           if (soundEnabledRef.current) playFocusTickSound();
           setFocused((f) =>
-            f === "lang"
-              ? "theme"
-              : f === "theme"
-                ? "sound"
-                : f === "sound"
-                  ? "launch"
-                  : "lang",
+            f === "lang" ? "sound" : f === "sound" ? "launch" : "lang",
           );
           break;
         case "ArrowUp":
           e.preventDefault();
           if (soundEnabledRef.current) playFocusTickSound();
           setFocused((f) =>
-            f === "lang"
-              ? "launch"
-              : f === "theme"
-                ? "lang"
-                : f === "sound"
-                  ? "theme"
-                  : "sound",
+            f === "lang" ? "launch" : f === "sound" ? "lang" : "sound",
           );
           break;
         case "ArrowLeft":
           if (focused === "lang") setLang("es");
-          if (focused === "theme") setTheme("dark");
           if (focused === "sound") setSoundEnabled(false);
           break;
         case "ArrowRight":
           if (focused === "lang") setLang("en");
-          if (focused === "theme") setTheme("light");
           if (focused === "sound") setSoundEnabled(true);
           break;
         case "Enter":
@@ -817,17 +743,9 @@ export default function LoadingScreen({
             break;
           }
           if (focused === "lang") setLang(lang === "es" ? "en" : "es");
-          if (focused === "theme")
-            setTheme(theme === "dark" ? "light" : "dark");
           if (focused === "sound") setSoundEnabled(!soundEnabled);
           setFocused((f) =>
-            f === "lang"
-              ? "theme"
-              : f === "theme"
-                ? "sound"
-                : f === "sound"
-                  ? "launch"
-                  : "lang",
+            f === "lang" ? "sound" : f === "sound" ? "launch" : "lang",
           );
           break;
       }
@@ -838,11 +756,9 @@ export default function LoadingScreen({
     phase,
     focused,
     lang,
-    theme,
     soundEnabled,
     handleLaunch,
     setLang,
-    setTheme,
     setSoundEnabled,
   ]);
 
@@ -932,8 +848,6 @@ export default function LoadingScreen({
               <SelectScreen
                 lang={lang}
                 setLang={setLang}
-                theme={theme}
-                setTheme={setTheme}
                 soundEnabled={soundEnabled}
                 setSoundEnabled={setSoundEnabled}
                 focused={focused}

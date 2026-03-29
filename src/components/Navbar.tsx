@@ -1,39 +1,18 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Moon, Sun, Languages } from 'lucide-react'
+import { Menu, X, Languages } from 'lucide-react'
 import FalconLogo from './FalconLogo'
 import { useLang } from '../context/LangContext'
-
-type Theme = 'dark' | 'light'
 
 export default function Navbar({ portfolioReady }: { portfolioReady: boolean }) {
   const [scrolled, setScrolled]     = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [theme, setTheme]           = useState<Theme>('dark')
   const { lang, setLang, t }        = useLang()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  useEffect(() => {
-    if (!portfolioReady) return
-    const stored = localStorage.getItem('halcon-theme')
-    if (stored === 'light' || stored === 'dark') {
-      setTheme(stored)
-      document.documentElement.setAttribute('data-theme', stored)
-    }
-  }, [portfolioReady])
-
-  const toggleTheme = useCallback(() => {
-    setTheme(prev => {
-      const next: Theme = prev === 'dark' ? 'light' : 'dark'
-      document.documentElement.setAttribute('data-theme', next)
-      localStorage.setItem('halcon-theme', next)
-      return next
-    })
   }, [])
 
   const toggleLang = useCallback(() => {
@@ -104,17 +83,6 @@ export default function Navbar({ portfolioReady }: { portfolioReady: boolean }) 
                   </AnimatePresence>
                 </motion.button>
 
-                {/* Theme toggle */}
-                <motion.button
-                  type="button"
-                  onClick={toggleTheme}
-                  aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-                  className="p-2 rounded-lg border border-border text-text-muted hover:text-accent-light hover:bg-bg-card hover:border-accent/25 transition-all"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {theme === 'dark' ? <Sun size={18} strokeWidth={1.75} /> : <Moon size={18} strokeWidth={1.75} />}
-                </motion.button>
               </>
             )}
           </div>
@@ -130,14 +98,6 @@ export default function Navbar({ portfolioReady }: { portfolioReady: boolean }) 
                 className="px-2 py-2 rounded-lg text-text-muted hover:text-accent-light text-xs font-bold tracking-wider"
               >
                 {t.nav.toggleLang}
-              </button>
-              <button
-                type="button"
-                onClick={toggleTheme}
-                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-                className="p-2 rounded-lg text-text-muted hover:text-accent-light"
-              >
-                {theme === 'dark' ? <Sun size={20} strokeWidth={1.75} /> : <Moon size={20} strokeWidth={1.75} />}
               </button>
             </>
           )}

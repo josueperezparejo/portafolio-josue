@@ -26,7 +26,6 @@ export default function App() {
 
   const handleComplete = useCallback((s: UserSettings) => {
     localStorage.setItem('halcon-lang', s.lang)
-    localStorage.setItem('halcon-theme', s.theme)
     localStorage.setItem('halcon-sound', s.soundEnabled ? '1' : '0')
     setScreenDone(true)
   }, [])

@@ -1,7 +1,6 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useRef, useMemo, useEffect } from 'react'
 import * as THREE from 'three'
-import { useTheme } from '../hooks/useTheme'
 
 const CAM_Z   = 2.4
 const CAM_FOV = 70
@@ -29,7 +28,7 @@ const WHITE       = new THREE.Color('#fff8e7')   // warm white — star sparks
 // ─────────────────────────────────────────────────────────────────────────────
 // Scene
 // ─────────────────────────────────────────────────────────────────────────────
-function Particles({ mouse, isLight }: { mouse: { current: THREE.Vector2 }; isLight: boolean }) {
+function Particles({ mouse }: { mouse: { current: THREE.Vector2 } }) {
   const ref = useRef<THREE.Points>(null)
 
   const { positions, colors, home, outerA, outerR } = useMemo(() => {
@@ -139,12 +138,12 @@ function Particles({ mouse, isLight }: { mouse: { current: THREE.Vector2 }; isLi
       </bufferGeometry>
       <pointsMaterial
         vertexColors
-        size={isLight ? 0.032 : 0.026}
+        size={0.026}
         sizeAttenuation
         transparent
-        opacity={isLight ? 0.95 : 0.90}
+        opacity={0.90}
         depthWrite={false}
-        blending={isLight ? THREE.NormalBlending : THREE.AdditiveBlending}
+        blending={THREE.AdditiveBlending}
       />
     </points>
   )
@@ -157,9 +156,6 @@ function Particles({ mouse, isLight }: { mouse: { current: THREE.Vector2 }; isLi
 export default function FalconEffect() {
   const containerRef = useRef<HTMLDivElement>(null)
   const mouse        = useRef(new THREE.Vector2(9999, 9999))
-  const theme        = useTheme()
-  const isLight      = theme === 'light'
-
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
       const rect = containerRef.current?.getBoundingClientRect()
@@ -188,7 +184,7 @@ export default function FalconEffect() {
         style={{ background: 'transparent', width: '100%', height: '100%' }}
         dpr={[1, 1.5]}
       >
-        <Particles mouse={mouse} isLight={isLight} />
+        <Particles mouse={mouse} />
       </Canvas>
     </div>
   )

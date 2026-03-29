@@ -29,7 +29,6 @@ export default function GlowCard({ children, className = '' }: Props) {
       whileHover={{ y: -4, transition: { duration: 0.3 } }}
       className={`relative overflow-hidden rounded-2xl border border-border bg-bg-card/30 backdrop-blur-sm transition-colors duration-300 hover:border-border-hover ${className}`}
     >
-      {/* Glow effect following cursor */}
       {isHovered && (
         <div
           className="pointer-events-none absolute -inset-px opacity-100 transition-opacity duration-300"
@@ -39,7 +38,6 @@ export default function GlowCard({ children, className = '' }: Props) {
         />
       )}
 
-      {/* Animated border glow */}
       {isHovered && (
         <div
           className="pointer-events-none absolute -inset-px rounded-2xl transition-opacity duration-300"

@@ -1,19 +1,11 @@
 import { motion } from "framer-motion";
 
 type FalconMarkProps = {
-  /** Controls the WIDTH in px. Height is derived from the SVG's 866:650 aspect ratio. */
   size?: number;
   className?: string;
-  /** 'gradient' | 'white' | 'muted' | 'stroke' */
   variant?: "gradient" | "white" | "muted" | "stroke";
 };
 
-/**
- * FalconMark — renders the user's actual falcon SVG via CSS masking.
- * /public/falcon.svg has the original paths with fill="white" on transparent bg.
- * The gradient/white/muted/stroke variants are applied as the background color
- * behind the mask.
- */
 export function FalconMark({
   size = 40,
   className = "",
@@ -43,8 +35,7 @@ export function FalconMark({
         className={className}
         style={{
           ...gradientStyle,
-          background:
-            "linear-gradient(135deg, #22d3ee 0%, #0891b2 40%, #6366f1 100%)",
+          background: "linear-gradient(135deg, #22d3ee 0%, #0891b2 40%, #6366f1 100%)",
         }}
       />
     );
@@ -68,7 +59,6 @@ export function FalconMark({
     );
   }
 
-  // stroke — very subtle, for watermarks
   return (
     <div
       className={className}
@@ -77,18 +67,12 @@ export function FalconMark({
   );
 }
 
-// ---------------------------------------------------------------------------
-// FalconLogo: mark + wordmark — used in Navbar
-// ---------------------------------------------------------------------------
 type FalconLogoProps = {
   size?: number;
   className?: string;
 };
 
-export default function FalconLogo({
-  size = 36,
-  className = "",
-}: FalconLogoProps) {
+export default function FalconLogo({ size = 36, className = "" }: FalconLogoProps) {
   return (
     <motion.div
       className={`flex items-center gap-2 ${className}`}

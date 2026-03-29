@@ -4,13 +4,10 @@ import { ArrowDown, MapPin, Cloud, Code2, Lightbulb } from 'lucide-react'
 import MagneticButton from './MagneticButton'
 import { FalconMark } from './FalconLogo'
 import { useLang } from '../context/LangContext'
-import { useTheme } from '../hooks/useTheme'
 
 
 export default function Hero() {
   const { t, lang } = useLang()
-  const theme = useTheme()
-  const isLight = theme === 'light'
   const [roleIndex, setRoleIndex]   = useState(0)
   const [displayText, setDisplayText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
@@ -71,11 +68,11 @@ export default function Hero() {
         className="absolute pointer-events-none select-none"
         style={{
           left: '85%', top: '85%', x: '-50%', y: '-50%',
-          opacity: useTransform(scrollYProgress, [0, 0.5], [isLight ? 0.14 : 0.055, 0]),
+          opacity: useTransform(scrollYProgress, [0, 0.5], [0.055, 0]),
           rotate:  useTransform(scrollYProgress, [0, 1], [0, 8]),
         }}
       >
-        <FalconMark size={350} variant={isLight ? 'gradient' : 'white'} />
+        <FalconMark size={350} variant="white" />
       </motion.div>
 
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
