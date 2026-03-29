@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(npx --yes create-vite@latest temp-scaffold --template react-ts)",
+      "Bash(cp -r temp-scaffold/* .)",
+      "Bash(cp temp-scaffold/.gitignore .)",
+      "Bash(rm -rf temp-scaffold .DS_Store)",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(node -e \"const l = require\\(''lucide-react''\\); console.log\\(Object.keys\\(l\\).filter\\(k => k.toLowerCase\\(\\).includes\\(''github''\\) || k.toLowerCase\\(\\).includes\\(''linkedin''\\)\\).join\\('', ''\\)\\)\")",
+      "Bash(ls dist/assets/*.js)",
+      "Bash(find /c/Users/Halcon/Documents/GitHub/portafolio-josue/src -type f \\\\\\(-name *.jsx -o -name *.js -o -name *.css -o -name *.tsx \\\\\\))",
+      "Bash(find /c/Users/Halcon/Documents/GitHub/portafolio-josue -maxdepth 2 -name tailwind.config* -o -name postcss.config*)",
+      "Bash(grep -r \"data-theme\\\\|setAttribute.*theme\" /c/Users/Halcon/Documents/GitHub/portafolio-josue/src --include=*.tsx --include=*.ts --include=*.jsx --include=*.js)",
+      "Bash(grep -r \"theme\\\\|extend\\\\|colors\\\\|backgroundColor\\\\|var\\(--color\" /c/Users/Halcon/Documents/GitHub/portafolio-josue/src --include=*.tsx --include=*.ts -l)",
+      "Bash(grep -r \"bg-bg\\\\|text-text\\\\|border-border\\\\|text-accent\" /c/Users/Halcon/Documents/GitHub/portafolio-josue/src --include=*.tsx -l)"
+    ]
+  }
+}
